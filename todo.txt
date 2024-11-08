@@ -1,4 +1,1 @@
-UDP telemetry
-UDP usefull telemetry
-UDP video sending
-UDP video recieving
+
