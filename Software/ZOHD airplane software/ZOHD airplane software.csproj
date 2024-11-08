@@ -6,6 +6,16 @@
     <RootNamespace>ZOHD_airplane_software</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>ZOHD</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="ReturnInfo.cs" />
+    <Compile Remove="UPnP.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Unosquare.Raspberry.IO" Version="0.27.1" />
+  </ItemGroup>
 
 </Project>

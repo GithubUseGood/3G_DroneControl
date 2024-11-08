@@ -1,0 +1,41 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "ZOHD/1.0.0": {
+        "dependencies": {
+          "System.Device.Gpio": "3.2.0"
+        },
+        "runtime": {
+          "ZOHD.dll": {}
+        }
+      },
+      "System.Device.Gpio/3.2.0": {
+        "runtime": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "assemblyVersion": "3.2.0.0",
+            "fileVersion": "3.200.24.32001"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ZOHD/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "System.Device.Gpio/3.2.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jaL93IC1S2wZfCSLWt8/1lQCp/pDAzDNE5dfLq+pubEhCp0BjDZze6rJMu2KdOuCOeRxHmBuhtWrIRlrTKFsTg==",
+      "path": "system.device.gpio/3.2.0",
+      "hashPath": "system.device.gpio.3.2.0.nupkg.sha512"
+    }
+  }
+}

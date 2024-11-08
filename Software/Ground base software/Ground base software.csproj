@@ -9,4 +9,37 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controls.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>6bf52a50-394a-11d3-b153-00c04f79faa6</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="AxWMPLib">
+      <WrapperTool>aximp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>6bf52a50-394a-11d3-b153-00c04f79faa6</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LibVLCSharp" Version="3.9.0" />
+    <PackageReference Include="LibVLCSharp.WinForms" Version="3.9.0" />
+    <PackageReference Include="Mono.Nat" Version="3.0.4" />
+    <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
+    <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.20" />
+    <PackageReference Include="VLC.DotNet.Forms" Version="3.1.0" />
+  </ItemGroup>
+
 </Project>

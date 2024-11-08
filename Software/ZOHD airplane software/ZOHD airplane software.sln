@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.11.35208.52
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.34407.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZOHD airplane software", "ZOHD airplane software.csproj", "{9E69D5B4-41E4-4AC3-BA13-14AA8680121E}"
 EndProject

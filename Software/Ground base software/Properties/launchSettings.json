@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Ground base software": {
+      "commandName": "Project",
+      "hotReloadEnabled": true
+    }
+  }
+}

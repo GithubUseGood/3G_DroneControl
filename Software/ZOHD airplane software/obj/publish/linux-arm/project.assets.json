@@ -1,0 +1,236 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0": {
+      "Microsoft.NET.ILLink.Tasks/8.0.8": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
+        }
+      },
+      "System.Device.Gpio/3.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net5.0/System.Device.Gpio.targets": {}
+        }
+      }
+    },
+    "net8.0/linux-arm": {
+      "Microsoft.NET.ILLink.Tasks/8.0.8": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.NET.ILLink.Tasks.props": {}
+        }
+      },
+      "System.Device.Gpio/3.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/System.Device.Gpio.dll": {
+            "related": ".xml"
+          }
+        },
+        "build": {
+          "buildTransitive/net5.0/System.Device.Gpio.targets": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.NET.ILLink.Tasks/8.0.8": {
+      "sha512": "P8wR6MUWwYXIjPJuBaZgo5zlI/GWI6QEAo6NyVIbPefa9CCkohYu7dP2rD/mrqnjEqfRHyl+h9VZrDoGpELqYg==",
+      "type": "package",
+      "path": "microsoft.net.illink.tasks/8.0.8",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "LICENSE.TXT",
+        "Sdk/Sdk.props",
+        "THIRD-PARTY-NOTICES.TXT",
+        "analyzers/dotnet/cs/ILLink.CodeFixProvider.dll",
+        "analyzers/dotnet/cs/ILLink.RoslynAnalyzer.dll",
+        "build/Microsoft.NET.ILLink.Analyzers.props",
+        "build/Microsoft.NET.ILLink.Tasks.props",
+        "build/Microsoft.NET.ILLink.targets",
+        "microsoft.net.illink.tasks.8.0.8.nupkg.sha512",
+        "microsoft.net.illink.tasks.nuspec",
+        "tools/net472/ILLink.Tasks.dll",
+        "tools/net472/ILLink.Tasks.dll.config",
+        "tools/net472/Mono.Cecil.Mdb.dll",
+        "tools/net472/Mono.Cecil.Pdb.dll",
+        "tools/net472/Mono.Cecil.Rocks.dll",
+        "tools/net472/Mono.Cecil.dll",
+        "tools/net472/Sdk/Sdk.props",
+        "tools/net472/System.Buffers.dll",
+        "tools/net472/System.Collections.Immutable.dll",
+        "tools/net472/System.Memory.dll",
+        "tools/net472/System.Numerics.Vectors.dll",
+        "tools/net472/System.Reflection.Metadata.dll",
+        "tools/net472/System.Runtime.CompilerServices.Unsafe.dll",
+        "tools/net472/build/Microsoft.NET.ILLink.Analyzers.props",
+        "tools/net472/build/Microsoft.NET.ILLink.Tasks.props",
+        "tools/net472/build/Microsoft.NET.ILLink.targets",
+        "tools/net8.0/ILLink.Tasks.deps.json",
+        "tools/net8.0/ILLink.Tasks.dll",
+        "tools/net8.0/Mono.Cecil.Mdb.dll",
+        "tools/net8.0/Mono.Cecil.Pdb.dll",
+        "tools/net8.0/Mono.Cecil.Rocks.dll",
+        "tools/net8.0/Mono.Cecil.dll",
+        "tools/net8.0/Sdk/Sdk.props",
+        "tools/net8.0/build/Microsoft.NET.ILLink.Analyzers.props",
+        "tools/net8.0/build/Microsoft.NET.ILLink.Tasks.props",
+        "tools/net8.0/build/Microsoft.NET.ILLink.targets",
+        "tools/net8.0/illink.deps.json",
+        "tools/net8.0/illink.dll",
+        "tools/net8.0/illink.runtimeconfig.json",
+        "useSharedDesignerContext.txt"
+      ]
+    },
+    "System.Device.Gpio/3.2.0": {
+      "sha512": "jaL93IC1S2wZfCSLWt8/1lQCp/pDAzDNE5dfLq+pubEhCp0BjDZze6rJMu2KdOuCOeRxHmBuhtWrIRlrTKFsTg==",
+      "type": "package",
+      "path": "system.device.gpio/3.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "README.md",
+        "THIRD-PARTY-NOTICES.TXT",
+        "buildTransitive/net5.0/System.Device.Gpio.targets",
+        "lib/net6.0-windows10.0.17763/System.Device.Gpio.dll",
+        "lib/net6.0-windows10.0.17763/System.Device.Gpio.xml",
+        "lib/net6.0/System.Device.Gpio.dll",
+        "lib/net6.0/System.Device.Gpio.xml",
+        "lib/netstandard2.0/System.Device.Gpio.dll",
+        "lib/netstandard2.0/System.Device.Gpio.xml",
+        "system.device.gpio.3.2.0.nupkg.sha512",
+        "system.device.gpio.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net8.0": [
+      "Microsoft.NET.ILLink.Tasks >= 8.0.8",
+      "System.Device.Gpio >= 3.2.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\ZOHD software\\ZOHD-UDP\\Software\\ZOHD airplane software\\ZOHD airplane software.csproj",
+      "projectName": "ZOHD airplane software",
+      "projectPath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\ZOHD airplane software\\ZOHD airplane software.csproj",
+      "packagesPath": "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\",
+      "outputPath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\ZOHD airplane software\\obj\\publish\\linux-arm\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\petar_0r3wy5h\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://www.myget.org/F/discord-net/api/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net8.0": {
+        "targetAlias": "net8.0",
+        "dependencies": {
+          "Microsoft.NET.ILLink.Tasks": {
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[8.0.8, )",
+            "autoReferenced": true
+          },
+          "System.Device.Gpio": {
+            "target": "Package",
+            "version": "[3.2.0, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "downloadDependencies": [
+          {
+            "name": "Microsoft.AspNetCore.App.Runtime.linux-arm",
+            "version": "[8.0.8, 8.0.8]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Host.linux-arm",
+            "version": "[8.0.8, 8.0.8]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Runtime.linux-arm",
+            "version": "[8.0.8, 8.0.8]"
+          }
+        ],
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+      }
+    },
+    "runtimes": {
+      "linux-arm": {
+        "#import": []
+      }
+    }
+  }
+}

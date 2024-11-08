@@ -1,0 +1,20 @@
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD airplane software.csproj.AssemblyReference.cache
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD airplane software.GeneratedMSBuildEditorConfig.editorconfig
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD airplane software.AssemblyInfoInputs.cache
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD airplane software.AssemblyInfo.cs
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD airplane software.csproj.CoreCompileInputs.cache
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD air.14C2332B.Up2Date
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD airplane software.genruntimeconfig.cache
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\ZOHD.exe
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\ZOHD.deps.json
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\ZOHD.runtimeconfig.json
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\ZOHD.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\ZOHD.pdb
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\refint\ZOHD.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ZOHD.pdb
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\ref\ZOHD.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\Unosquare.Raspberry.Abstractions.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\Unosquare.RaspberryIO.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\Swan.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\Swan.Lite.dll
