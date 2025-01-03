@@ -200,3 +200,19 @@ D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\lin
 D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\Unosquare.RaspberryIO.dll
 D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\Swan.dll
 D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\Swan.Lite.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\Iot.Device.Bindings.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\Microsoft.Extensions.Logging.Abstractions.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\Microsoft.Win32.SystemEvents.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\System.CodeDom.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\System.Device.Gpio.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\System.Drawing.Common.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\System.IO.Pipelines.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\System.IO.Ports.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\System.Management.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\UnitsNet.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\fr-CA\UnitsNet.resources.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\nb-NO\UnitsNet.resources.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\ru-RU\UnitsNet.resources.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\zh-CN\UnitsNet.resources.dll
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\linux-arm64\libSystem.IO.Ports.Native.so
+D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\obj\Release\net8.0\linux-arm64\ZOHD airplane software.sourcelink.json

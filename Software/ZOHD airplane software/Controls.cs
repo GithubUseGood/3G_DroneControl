@@ -1,133 +1,126 @@
 
 using System;
-
-
 using System.Runtime.CompilerServices;
 
-namespace UDPtest 
+namespace UDPtest
 {
     using System;
+    using Iot.Device.Pwm; // For Pca9685
 
-  
     using System.Threading.Tasks;
     using Unosquare.RaspberryIO.Abstractions;
     using Unosquare.RaspberryIO;
     using System.Runtime.InteropServices;
-  
+    using System.Device.I2c;
 
+    /// <summary>
+    /// Control servo motors using PCA9685
+    /// </summary>
     public static class Controls
     {
-        // Define GPIO pins for three servos
-        const uint ServoPin1 = 5; // GPIO pin for servo 1
-        const uint ServoPin2 = 6; // GPIO pin for servo 2
-        const uint ServoPin3 = 13; // GPIO pin for servo 3
-        private static bool _isUpdating = false;
-        // Public static integers for desired angles of each servo
-        public static int DesiredAngle1 = 90; // Angle for servo 1
-        public static int DesiredAngle2 = 45; // Angle for servo 2
-        public static int DesiredAngle3 = 135; // Angle for servo 3
+        /// <summary>
+        /// Connects raspberry pi zero 2 w to PCA96865
+        /// </summary>
+        public static Pca9685 ConnectServoController()
+        {
+            Console.WriteLine("Connecting to PCA9685...");
 
-        // DLL imports for pigpio functions
-        [DllImport("libpigpio.so", EntryPoint = "gpioInitialise")]
-        private static extern int GpioInitialise();
-
-        [DllImport("libpigpio.so", EntryPoint = "gpioSetMode")]
-        private static extern int GpioSetMode(uint gpio, uint mode);
-
-        [DllImport("libpigpio.so", EntryPoint = "gpioServo")]
-        private static extern int GpioServo(uint gpio, uint pulsewidth);
-
-        [DllImport("libpigpio.so", EntryPoint = "gpioGetServoPulsewidth")]
-        private static extern int GpioGetServoPulsewidth(uint gpio);
-
-        [DllImport("libpigpio.so", EntryPoint = "gpioTerminate")]
-        private static extern void GpioTerminate();
-
-        const uint PI_OUTPUT = 1; // Define output mode
-
-        public static void Init()
-        { 
-            // Initialize pigpio
-            if (GpioInitialise() < 0)
+            try
             {
-                Console.WriteLine("pigpio initialization failed.");
+                // Initialize I2C connection
+                const int i2cBusId = 1; // Default I2C bus on Raspberry Pi
+                const int pca9685Address = 0x40; // Default I2C address for PCA9685
+                I2cConnectionSettings settings = new I2cConnectionSettings(i2cBusId, pca9685Address);
+                I2cDevice device = I2cDevice.Create(settings);
+
+                // Initialize PCA9685
+                Pca9685 pca9685 = new Pca9685(device);
+                pca9685.PwmFrequency = 50; // Set frequency to 50 Hz for servo control
+
+                Console.WriteLine("PCA9685 Initialized.");
+
+                return pca9685; // Return the PCA9685 object for use
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error connecting to PCA9685: {ex.Message}");
+                return null; // Return null if connection fails
+            }
+        }
+
+        private static bool isTaskRunning = false;
+
+        /// <summary>
+        /// Parses data incoming to the raspberry and writes it to servo.
+        /// </summary>
+        public static async Task WriteServoData(string message, Pca9685 pca)
+        {
+            // Check if the task is already running
+            if (isTaskRunning)
+            {
+               
                 return;
             }
 
-            // Set the GPIO pin modes to OUTPUT
-            GpioSetMode(ServoPin1, PI_OUTPUT);
-            GpioSetMode(ServoPin2, PI_OUTPUT);
-            GpioSetMode(ServoPin3, PI_OUTPUT);
-
-            // Move each servo to the desired angles
-            MoveServoToAngle(ServoPin1, DesiredAngle1);
-            MoveServoToAngle(ServoPin2, DesiredAngle2);
-            MoveServoToAngle(ServoPin3, DesiredAngle3);
-
-            // Clean up and stop pigpio
-            GpioTerminate();
-        }
-
-        public static async Task UpdateServosAsync(string messsage)
-        {
-            // Check if the servos are already updating
-            if (_isUpdating)
-            {
-                Console.WriteLine("Servos are already updating. Exiting the method.");
-                return; // Exit if already updating
-            }
-
-            _isUpdating = true; // Set the flag to indicate servos are updating
             try
             {
-                ParseOutput(messsage);
-                 MoveServoToAngle(ServoPin1, DesiredAngle1);
-                 MoveServoToAngle(ServoPin2, DesiredAngle2);
-                 MoveServoToAngle(ServoPin3, DesiredAngle3);
+                // Mark the task as running
+                isTaskRunning = true;
+
+                var unpackedState = ControllerStateParser.UnpackState(message);
+
+                SetServoAngle(pca, 0, unpackedState.LeftThumbY);
+                SetServoAngle(pca, 1, unpackedState.RightThumbX);
+                SetServoAngle(pca, 2, unpackedState.RightThumbY);
+
+
             }
             finally
             {
-                _isUpdating = false; // Reset the flag when done
+                // Mark the task as not running when it completes
+                isTaskRunning = false;
             }
         }
 
-        // Function to move the servo to the desired angle
-        public static void MoveServoToAngle(uint servoPin, int angle)
-        {
-            if (angle < 0 || angle > 180)
+        private static void SetServoAngle(Pca9685 pca9685, int channel, int angle)
+        { 
+            if (pca9685 == null)
             {
-                Console.WriteLine($"Angle out of range for pin {servoPin}. Please use a value between 0 and 180.");
+                Console.WriteLine("PCA9685 not initialized.");
                 return;
             }
 
-            uint pulseWidth = (uint)MapAngleToPulseWidth(angle); // Cast to uint
-            GpioServo(servoPin, pulseWidth);
-           
-           
+            // Map angle to duty cycle (5% for 0 degrees, 10% for 180 degrees)
+            const double minDutyCycle = 0.05;
+            const double maxDutyCycle = 0.10;
+            double dutyCycle = minDutyCycle + (maxDutyCycle - minDutyCycle) * angle / 180.0;
+
+            pca9685.SetDutyCycle(channel, dutyCycle); // Set the duty cycle for the specified channel
         }
 
-        // Function to map angle to pulse width
-        private static int MapAngleToPulseWidth(int angle)
+        private static class ControllerStateParser
         {
-            return 530 + (angle * (2370 - 530) / 180); // Map 0-180 to 530-2370 us
+            public static (int LeftThumbY, int LeftThumbX, int RightThumbX, int RightThumbY, bool YButton, bool BButton) UnpackState(string message)
+            {
+                // Ensure the message has the expected length and structure
+                if (message.Length < 10)
+                {
+                    throw new ArgumentException("Invalid message format.");
+                }
+
+                // Parse joystick values from the string
+                int leftThumbY = int.Parse(message.Substring(1, message.IndexOf('w') - 1)); // Extract value before 'w'
+                int leftThumbX = int.Parse(message.Substring(message.IndexOf('w') + 1, message.IndexOf('e') - message.IndexOf('w') - 1));
+                int rightThumbX = int.Parse(message.Substring(message.IndexOf('e') + 1, message.IndexOf('r') - message.IndexOf('e') - 1));
+                int rightThumbY = int.Parse(message.Substring(message.IndexOf('r') + 1, message.IndexOf('T') - message.IndexOf('r') - 1));
+
+                // Parse button states (T or F) for Y and B buttons
+                bool yButtonPressed = message.EndsWith("T") && message[message.IndexOf('T')] == 'T';
+                bool bButtonPressed = message[message.IndexOf('T') + 1] == 'T';
+
+                // Return unpacked data
+                return (leftThumbY, leftThumbX, rightThumbX, rightThumbY, yButtonPressed, bButtonPressed);
+            }
         }
-
-        public static void ParseOutput(string output)
-        {
-            if (output.Length < 5) // Ensure the string is long enough
-                throw new ArgumentException("Output string is too short.");
-
-            // Extract servo angles
-            DesiredAngle1 = Int32.Parse(output.Substring(0, output.IndexOf('q')));
-            DesiredAngle2 = Int32.Parse(output.Substring(output.IndexOf('q') + 1, output.IndexOf('w') - output.IndexOf('q') - 1));
-            DesiredAngle3 = Int32.Parse(output.Substring(output.IndexOf('w') + 1, output.IndexOf('e') - output.IndexOf('w') - 1));
-
-            // Extract button states
-          //  ButtonYPressed = output[^2] == 'T'; // Last second last character
-           // ButtonBPressed = output[^1] == 'T'; // Last character
-        }
-
-      
     }
 }
-

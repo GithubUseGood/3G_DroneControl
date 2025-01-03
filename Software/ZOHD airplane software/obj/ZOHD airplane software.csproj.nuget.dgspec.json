@@ -52,6 +52,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Iot.Device.Bindings": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "System.Device.Gpio": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
             "Unosquare.Raspberry.IO": {
               "target": "Package",
               "version": "[0.27.1, )"
@@ -73,7 +81,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
