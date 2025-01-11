@@ -18,8 +18,8 @@ namespace Ground_base_software
 {
     public partial class Form1 : Form
     {
-        private static int PortTXT = 9999;
-        private static int PortVID = 9995;
+        private static int PortTXT = 9998;
+        private static int PortVID = 9990;
 
         private static IPEndPoint HostIp = new IPEndPoint(IPAddress.Any, PortTXT);
         private static UdpClient _client = new UdpClient(9998);
@@ -65,13 +65,13 @@ namespace Ground_base_software
             Label7.Text = "Loading...";
             IPlabel.Text = "Loading...";
 
-          //  Upnp.Setup();
+            Upnp.Setup();
 
-          //  await Upnp.WaitForDeviceConnection();
+            await Upnp.WaitForDeviceConnection();
 
-          //  Upnp.PortForward(PortTXT, PortTXT);
-         //   Upnp.PortForward(9998, 9998);
-         //  Upnp.PortForward(PortVID, PortVID);
+            Upnp.PortForward(PortTXT, PortTXT);
+            Upnp.PortForward(9998, 9998);
+           Upnp.PortForward(PortVID, PortVID);
 
             // port forward for testing porpuses // 
 

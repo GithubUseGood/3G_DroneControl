@@ -963,3 +963,4 @@ D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Vlc.DotNet.Core.dll
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Vlc.DotNet.Core.Interops.dll
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Vlc.DotNet.Forms.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\obj\Debug\net8.0-windows\Ground base software.sourcelink.json

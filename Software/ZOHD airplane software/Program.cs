@@ -50,7 +50,7 @@ namespace ZOHD_airplane_software
             {
            
                await UDP_Communication.SendUDP(_client, OutputStatus.GetOutput());
-                Thread.Sleep(25);
+                Thread.Sleep(30);
             }
         }
         static async Task RecieveUDP(UdpClient _client)

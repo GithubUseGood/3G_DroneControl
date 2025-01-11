@@ -48,7 +48,7 @@ namespace ZOHD_airplane_software
             if (!OperatingSystem.IsWindows())
             {
                 string command = "libcamera-vid";
-                string arguments = @"libcamera-vid -t 0 --width 1280 --height 720 --framerate 30 --bitrate 870000 --inline --nopreview --output udp://" + ipAndPort;
+                string arguments = @"libcamera-vid -t 0 --width 1280 --height 720 --framerate 30 --bitrate 600000 --inline --nopreview --output udp://" + ipAndPort;
                 Console.WriteLine("Sending UDP video to " + ipAndPort);
                 Console.WriteLine(command + " " + arguments);
 

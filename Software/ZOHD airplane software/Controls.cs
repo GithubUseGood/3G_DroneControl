@@ -1,4 +1,4 @@
-
+﻿
 using System;
 using System.Runtime.CompilerServices;
 
@@ -38,6 +38,7 @@ namespace UDPtest
                 pca9685.PwmFrequency = 50; // Set frequency to 50 Hz for servo control
 
                 Console.WriteLine("PCA9685 Initialized.");
+                I2C_on_exit_cleanUp(pca9685);
 
                 return pca9685; // Return the PCA9685 object for use
             }
@@ -53,37 +54,33 @@ namespace UDPtest
         /// <summary>
         /// Parses data incoming to the raspberry and writes it to servo.
         /// </summary>
+        private static SemaphoreSlim semaphore = new SemaphoreSlim(1, 1);
+
         public static async Task WriteServoData(string message, Pca9685 pca)
         {
-            // Check if the task is already running
-            if (isTaskRunning)
+            if (!await semaphore.WaitAsync(150)) // Adjust timeout if needed
             {
-               
+                Console.WriteLine("ERROR: Servo control timed out");
                 return;
             }
 
             try
             {
-                // Mark the task as running
-                isTaskRunning = true;
-
+             
                 var unpackedState = ControllerStateParser.UnpackState(message);
-
                 SetServoAngle(pca, 0, unpackedState.LeftThumbY);
                 SetServoAngle(pca, 1, unpackedState.RightThumbX);
                 SetServoAngle(pca, 2, unpackedState.RightThumbY);
-
-
             }
             finally
             {
-                // Mark the task as not running when it completes
-                isTaskRunning = false;
+                semaphore.Release();
             }
         }
 
         private static void SetServoAngle(Pca9685 pca9685, int channel, int angle)
-        { 
+        {
+         
             if (pca9685 == null)
             {
                 Console.WriteLine("PCA9685 not initialized.");
@@ -98,25 +95,76 @@ namespace UDPtest
             pca9685.SetDutyCycle(channel, dutyCycle); // Set the duty cycle for the specified channel
         }
 
+        static async Task I2C_on_exit_cleanUp(Pca9685 pca)
+        {
+            var cts = new CancellationTokenSource();
+            Console.CancelKeyPress += (sender, e) =>
+            {
+                e.Cancel = true; // Prevent immediate termination
+                Console.WriteLine("\nCtrl+C detected! Cleaning up...");
+                cts.Cancel(); // Trigger cancellation
+            };
+
+            try
+            {
+                // Wait until Ctrl+C is pressed (non-blocking)
+                await Task.Delay(Timeout.Infinite, cts.Token);
+            }
+            catch (TaskCanceledException)
+            {
+                // Expected exception when cancellation token is triggered
+            }
+            finally
+            {
+                // Cleanup I²C resources
+                pca?.Dispose();
+                Console.WriteLine("I²C connection closed.");
+                Environment.Exit(0);
+            }
+        }
+
         private static class ControllerStateParser
         {
             public static (int LeftThumbY, int LeftThumbX, int RightThumbX, int RightThumbY, bool YButton, bool BButton) UnpackState(string message)
             {
-                // Ensure the message has the expected length and structure
-                if (message.Length < 10)
+                // Declare variables
+                int leftThumbY = 0, leftThumbX = 0, rightThumbX = 0, rightThumbY = 0;
+                bool yButtonPressed = false, bButtonPressed = false;
+
+                try
                 {
-                    throw new ArgumentException("Invalid message format.");
+                
+
+                    // Ensure the message has the expected length and structure
+                    if (message.Length < 10 || !message.Contains("q") || !message.Contains("w") || !message.Contains("e") || !message.Contains("r"))
+                    {
+                        throw new ArgumentException("Invalid message format.");
+                    }
+
+          
+
+                    // Extract joystick values
+                    leftThumbY = int.Parse(message.Substring(0, message.IndexOf('q'))); // Value before 'q'
+                    leftThumbX = int.Parse(message.Substring(message.IndexOf('q') + 1, message.IndexOf('w') - message.IndexOf('q') - 1)); // Between 'q' and 'w'
+                    rightThumbX = int.Parse(message.Substring(message.IndexOf('w') + 1, message.IndexOf('e') - message.IndexOf('w') - 1)); // Between 'w' and 'e'
+                    rightThumbY = int.Parse(message.Substring(message.IndexOf('e') + 1, message.IndexOf('r') - message.IndexOf('e') - 1)); // Between 'e' and 'r'
+
+         
+
+                    // Parse button states
+                    yButtonPressed = message[message.IndexOf('r') + 1] == 'T';
+                    bButtonPressed = message[message.IndexOf('r') + 2] == 'T';
+
+                
                 }
+                catch (Exception ex)
+                {
 
-                // Parse joystick values from the string
-                int leftThumbY = int.Parse(message.Substring(1, message.IndexOf('w') - 1)); // Extract value before 'w'
-                int leftThumbX = int.Parse(message.Substring(message.IndexOf('w') + 1, message.IndexOf('e') - message.IndexOf('w') - 1));
-                int rightThumbX = int.Parse(message.Substring(message.IndexOf('e') + 1, message.IndexOf('r') - message.IndexOf('e') - 1));
-                int rightThumbY = int.Parse(message.Substring(message.IndexOf('r') + 1, message.IndexOf('T') - message.IndexOf('r') - 1));
-
-                // Parse button states (T or F) for Y and B buttons
-                bool yButtonPressed = message.EndsWith("T") && message[message.IndexOf('T')] == 'T';
-                bool bButtonPressed = message[message.IndexOf('T') + 1] == 'T';
+                    Console.Clear();
+                    Console.WriteLine($"Error parsing message: {ex.Message}");
+                    Console.WriteLine($"Current parsed values: LeftThumbY={leftThumbY}, LeftThumbX={leftThumbX}, RightThumbX={rightThumbX}, RightThumbY={rightThumbY}, YButton={yButtonPressed}, BButton={bButtonPressed}");
+                    throw;
+                }
 
                 // Return unpacked data
                 return (leftThumbY, leftThumbX, rightThumbX, rightThumbY, yButtonPressed, bButtonPressed);
