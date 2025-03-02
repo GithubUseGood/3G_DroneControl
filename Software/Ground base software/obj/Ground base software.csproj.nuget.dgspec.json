@@ -60,6 +60,10 @@
               "target": "Package",
               "version": "[3.9.0, )"
             },
+            "Microsoft.Web.WebView2": {
+              "target": "Package",
+              "version": "[1.0.3065.39, )"
+            },
             "Mono.Nat": {
               "target": "Package",
               "version": "[3.0.4, )"
@@ -96,7 +100,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

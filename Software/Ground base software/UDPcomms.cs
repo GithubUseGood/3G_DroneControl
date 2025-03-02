@@ -1,6 +1,9 @@
+using Ground_base_software;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ZOHD_airplane_software
 { 
@@ -52,6 +55,18 @@ namespace ZOHD_airplane_software
                 await Task.Delay(TimeSpan.FromSeconds(1));
             }
         }
+
+        public static PingReply CheckIfReachable(string ipv4) 
+        {
+            using (Ping ping = new Ping()) 
+            {
+                PingReply reply = ping.Send(ipv4, 1000); // 1000ms timeout
+                return reply;
+            }
+        }
+
+
+      
 
         public static Color AsignColor(int value, int[] Borders) 
         {
@@ -108,7 +123,33 @@ namespace ZOHD_airplane_software
          
         }
 
-        
+        public static async Task KeepNATopen(UdpClient _client1, UdpClient _client2) // heartbeat
+        {
+            Byte[] Message = Encoding.ASCII.GetBytes("Keep me alive cuh");
+            while (true) 
+            {
+               await _client1.SendAsync(Message);
+               await _client2.SendAsync(Message);
+
+                Thread.Sleep(5000);
+            }
+           
+        }
+
+        public static List<int> ExtractPorts(string message)
+        {
+            List<int> ports = new List<int>();
+            MatchCollection matches = Regex.Matches(message, @"\d+");
+
+            foreach (Match match in matches)
+            {
+                ports.Add(int.Parse(match.Value));
+            }
+
+            return ports;
+        }
+
+
 
     }
 }

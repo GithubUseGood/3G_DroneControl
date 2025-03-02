@@ -41,12 +41,13 @@
             label12 = new Label();
             label7 = new Label();
             button1 = new Button();
+            label13 = new Label();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(2251, 51);
+            label1.Location = new Point(214, 43);
             label1.Name = "label1";
             label1.Size = new Size(59, 25);
             label1.TabIndex = 0;
@@ -56,7 +57,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(2110, 51);
+            label2.Location = new Point(73, 43);
             label2.Name = "label2";
             label2.Size = new Size(135, 25);
             label2.TabIndex = 1;
@@ -66,7 +67,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(2110, 87);
+            label3.Location = new Point(73, 79);
             label3.Name = "label3";
             label3.Size = new Size(187, 25);
             label3.TabIndex = 2;
@@ -75,7 +76,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(2300, 87);
+            label4.Location = new Point(263, 79);
             label4.Name = "label4";
             label4.Size = new Size(59, 25);
             label4.TabIndex = 3;
@@ -85,7 +86,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(2267, 127);
+            label5.Location = new Point(230, 119);
             label5.Name = "label5";
             label5.Size = new Size(59, 25);
             label5.TabIndex = 7;
@@ -95,7 +96,7 @@
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(2110, 127);
+            label6.Location = new Point(73, 119);
             label6.Name = "label6";
             label6.Size = new Size(151, 25);
             label6.TabIndex = 8;
@@ -105,7 +106,7 @@
             // label8
             // 
             label8.AutoSize = true;
-            label8.Location = new Point(2217, 162);
+            label8.Location = new Point(180, 154);
             label8.Name = "label8";
             label8.Size = new Size(59, 25);
             label8.TabIndex = 10;
@@ -114,7 +115,7 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(2223, 196);
+            label9.Location = new Point(186, 188);
             label9.Name = "label9";
             label9.Size = new Size(59, 25);
             label9.TabIndex = 11;
@@ -124,7 +125,7 @@
             // label10
             // 
             label10.AutoSize = true;
-            label10.Location = new Point(2110, 162);
+            label10.Location = new Point(73, 154);
             label10.Name = "label10";
             label10.Size = new Size(101, 25);
             label10.TabIndex = 12;
@@ -134,7 +135,7 @@
             // label11
             // 
             label11.AutoSize = true;
-            label11.Location = new Point(2110, 196);
+            label11.Location = new Point(73, 188);
             label11.Name = "label11";
             label11.Size = new Size(107, 25);
             label11.TabIndex = 13;
@@ -144,7 +145,7 @@
             // label12
             // 
             label12.AutoSize = true;
-            label12.Location = new Point(2110, 233);
+            label12.Location = new Point(73, 225);
             label12.Name = "label12";
             label12.Size = new Size(101, 25);
             label12.TabIndex = 14;
@@ -153,7 +154,7 @@
             // label7
             // 
             label7.AutoSize = true;
-            label7.Location = new Point(2223, 233);
+            label7.Location = new Point(186, 225);
             label7.Name = "label7";
             label7.Size = new Size(59, 25);
             label7.TabIndex = 15;
@@ -161,7 +162,7 @@
             // 
             // button1
             // 
-            button1.Location = new Point(2110, 292);
+            button1.Location = new Point(73, 284);
             button1.Name = "button1";
             button1.Size = new Size(187, 34);
             button1.TabIndex = 16;
@@ -169,11 +170,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(372, 43);
+            label13.Name = "label13";
+            label13.Size = new Size(60, 25);
+            label13.TabIndex = 17;
+            label13.Text = "Proxy:";
+            label13.Click += label13_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2421, 1440);
+            Controls.Add(label13);
             Controls.Add(button1);
             Controls.Add(label7);
             Controls.Add(label12);
@@ -210,5 +222,6 @@
         private Label label12;
         private Label label7;
         private Button button1;
+        private Label label13;
     }
 }

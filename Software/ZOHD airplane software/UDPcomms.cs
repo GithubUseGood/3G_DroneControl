@@ -2,6 +2,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ZOHD_airplane_software
 { 
@@ -17,6 +18,19 @@ namespace ZOHD_airplane_software
             UdpReceiveResult result;
             result = await _client.ReceiveAsync();
             return result.RemoteEndPoint;
+        }
+
+        public static List<int> ExtractPorts(string message)
+        {
+            List<int> ports = new List<int>();
+            MatchCollection matches = Regex.Matches(message, @"\d+");
+
+            foreach (Match match in matches)
+            {
+                ports.Add(int.Parse(match.Value));
+            }
+
+            return ports;
         }
 
         /// <summary>

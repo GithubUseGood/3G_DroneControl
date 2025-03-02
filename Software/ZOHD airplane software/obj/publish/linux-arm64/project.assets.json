@@ -41,7 +41,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.11": {
+      "Microsoft.NET.ILLink.Tasks/8.0.12": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -1451,7 +1451,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.11": {
+      "Microsoft.NET.ILLink.Tasks/8.0.12": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -3031,10 +3031,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.11": {
-      "sha512": "zk5lnZrYJgtuJG8L4v17Ej8rZ3PUcR2iweNV08BaO5LbYHIi2wNaVNcJoLxvqgQdnjLlKnCCfVGLDr6QHeAarQ==",
+    "Microsoft.NET.ILLink.Tasks/8.0.12": {
+      "sha512": "FV4HnQ3JI15PHnJ5PGTbz+rYvrih42oLi/7UMIshNwCwUZhTq13UzrggtXk4ygrcMcN+4jsS6hhshx2p/Zd0ig==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/8.0.11",
+      "path": "microsoft.net.illink.tasks/8.0.12",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -3048,7 +3048,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.8.0.11.nupkg.sha512",
+        "microsoft.net.illink.tasks.8.0.12.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -6650,7 +6650,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Iot.Device.Bindings >= 3.2.0",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.11",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.12",
       "System.Device.Gpio >= 3.2.0",
       "Unosquare.Raspberry.IO >= 0.27.1"
     ]
@@ -6715,7 +6715,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.11, )",
+            "version": "[8.0.12, )",
             "autoReferenced": true
           },
           "System.Device.Gpio": {
@@ -6741,15 +6741,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.linux-arm64",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.12, 8.0.12]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.linux-arm64",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.12, 8.0.12]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.linux-arm64",
-            "version": "[8.0.11, 8.0.11]"
+            "version": "[8.0.12, 8.0.12]"
           }
         ],
         "frameworkReferences": {
@@ -6757,7 +6757,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.404/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

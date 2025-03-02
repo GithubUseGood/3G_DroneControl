@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "PU+KTYrhGG4=",
+  "dgSpecHash": "gntM2t8cWTw=",
   "success": true,
   "projectFilePath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\Ground base software\\Ground base software.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\libvlcsharp.winforms\\3.9.0\\libvlcsharp.winforms.3.9.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.web.webview2\\1.0.3065.39\\microsoft.web.webview2.1.0.3065.39.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\mono.nat\\3.0.4\\mono.nat.3.0.4.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\1.6.1\\netstandard.library.1.6.1.nupkg.sha512",

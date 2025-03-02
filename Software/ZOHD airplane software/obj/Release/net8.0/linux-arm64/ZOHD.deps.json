@@ -10,100 +10,100 @@
       "ZOHD/1.0.0": {
         "dependencies": {
           "Iot.Device.Bindings": "3.2.0",
-          "Microsoft.NET.ILLink.Tasks": "8.0.11",
+          "Microsoft.NET.ILLink.Tasks": "8.0.12",
           "System.Device.Gpio": "3.2.0",
           "Unosquare.Raspberry.IO": "0.27.1",
-          "runtimepack.Microsoft.NETCore.App.Runtime.linux-arm64": "8.0.11"
+          "runtimepack.Microsoft.NETCore.App.Runtime.linux-arm64": "8.0.12"
         },
         "runtime": {
           "ZOHD.dll": {}
         }
       },
-      "runtimepack.Microsoft.NETCore.App.Runtime.linux-arm64/8.0.11": {
+      "runtimepack.Microsoft.NETCore.App.Runtime.linux-arm64/8.0.12": {
         "runtime": {
           "System.Collections.Concurrent.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Collections.Immutable.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Collections.NonGeneric.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Collections.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.ComponentModel.Primitives.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.ComponentModel.TypeConverter.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Console.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Diagnostics.DiagnosticSource.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Diagnostics.Process.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Diagnostics.StackTrace.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.IO.Compression.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.IO.MemoryMappedFiles.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.IO.Pipes.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Net.NameResolution.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Net.Primitives.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Net.Sockets.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.ObjectModel.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Private.CoreLib.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Private.Uri.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.Reflection.Metadata.dll": {
             "assemblyVersion": "8.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           },
           "System.dll": {
             "assemblyVersion": "4.0.0.0",
-            "fileVersion": "8.0.1124.51707"
+            "fileVersion": "8.0.1224.60305"
           }
         }
       },
@@ -126,7 +126,7 @@
         }
       },
       "Microsoft.Extensions.Logging.Abstractions/7.0.1": {},
-      "Microsoft.NET.ILLink.Tasks/8.0.11": {},
+      "Microsoft.NET.ILLink.Tasks/8.0.12": {},
       "Microsoft.NETCore.Platforms/5.0.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
       "Microsoft.Win32.Primitives/4.3.0": {
@@ -861,7 +861,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "runtimepack.Microsoft.NETCore.App.Runtime.linux-arm64/8.0.11": {
+    "runtimepack.Microsoft.NETCore.App.Runtime.linux-arm64/8.0.12": {
       "type": "runtimepack",
       "serviceable": false,
       "sha512": ""
@@ -880,12 +880,12 @@
       "path": "microsoft.extensions.logging.abstractions/7.0.1",
       "hashPath": "microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512"
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.11": {
+    "Microsoft.NET.ILLink.Tasks/8.0.12": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-zk5lnZrYJgtuJG8L4v17Ej8rZ3PUcR2iweNV08BaO5LbYHIi2wNaVNcJoLxvqgQdnjLlKnCCfVGLDr6QHeAarQ==",
-      "path": "microsoft.net.illink.tasks/8.0.11",
-      "hashPath": "microsoft.net.illink.tasks.8.0.11.nupkg.sha512"
+      "sha512": "sha512-FV4HnQ3JI15PHnJ5PGTbz+rYvrih42oLi/7UMIshNwCwUZhTq13UzrggtXk4ygrcMcN+4jsS6hhshx2p/Zd0ig==",
+      "path": "microsoft.net.illink.tasks/8.0.12",
+      "hashPath": "microsoft.net.illink.tasks.8.0.12.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/5.0.0": {
       "type": "package",

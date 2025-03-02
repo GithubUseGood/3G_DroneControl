@@ -14,16 +14,27 @@ using Vlc.DotNet.Forms;
 using System.Diagnostics;
 using System.Security.Permissions;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
+using System.Text;
 namespace Ground_base_software
 {
     public partial class Form1 : Form
     {
+
+       
+       
+
+        public static bool UseProxy { get; set; }
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
-
+        private static int NegotiationPort = 9901;
+      
+        private static UdpClient NegotiationClient = new UdpClient();
         private static IPEndPoint HostIp = new IPEndPoint(IPAddress.Any, PortTXT);
-        private static UdpClient _client = new UdpClient(9998);
+        private static UdpClient _client = new UdpClient(PortTXT);
 
+        private static UdpClient _NATpuncherTXT = new UdpClient();
+        private static UdpClient _NATpuncherVID = new UdpClient();
 
         private static bool ReadData = true;
         private static bool SendData = true;
@@ -36,6 +47,7 @@ namespace Ground_base_software
         private static Label Label6;
         private static Label Label7;
         private static Label IPlabel;
+        public static Label ProxyLabel { get; set; }
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
 
@@ -45,13 +57,21 @@ namespace Ground_base_software
         public Form1()
         {
             InitializeComponent();
+            DialogResult result = MessageBox.Show("Welcome! Do you want to use PeerJS", "ZOHD", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-
-            // StartPlayback("udp://0.0.0.0:" + PortVID);
+            if (result == DialogResult.Yes)
+            {
+                Form1.UseProxy = true;
+            }
+            else
+            {
+                Form1.UseProxy = false;
+            }
         }
 
         private async void Form1_Load(object sender, EventArgs e)
         {
+            ProxyLabel = this.label13;
             IPlabel = this.label7;
             label = this.label1;
             Label2 = this.label4;
@@ -64,20 +84,30 @@ namespace Ground_base_software
             Label6.Text = "Loading...";
             Label7.Text = "Loading...";
             IPlabel.Text = "Loading...";
+            if (Form1.UseProxy == false)
+            {
+                Upnp.Setup();
+                await Upnp.WaitForDeviceConnection();
+                Upnp.PortForward(PortTXT, PortTXT);
+                Upnp.PortForward(9998, 9998);
+                Upnp.PortForward(PortVID, PortVID);
+                ProxyLabel.Text = "Proxy: OFF";
+                
+            }
+            else 
+            {
+               
 
-            Upnp.Setup();
+            }
 
-            await Upnp.WaitForDeviceConnection();
-
-            Upnp.PortForward(PortTXT, PortTXT);
-            Upnp.PortForward(9998, 9998);
-           Upnp.PortForward(PortVID, PortVID);
 
             // port forward for testing porpuses // 
 
 
             Task.Run(() => StartPlayback(PortVID.ToString()));
             StartUDPcomms();
+
+
         }
 
         static async Task StartUDPcomms()
@@ -111,7 +141,7 @@ namespace Ground_base_software
         }
         static async Task RecieveUDP(UdpClient _client)
         {
-            RecievedMessage = await UDP_Communication.ReadUDP(_client); 
+            RecievedMessage = await UDP_Communication.ReadUDP(_client);
             Task.Run(() => UpdateUI());
             while (ReadData)
             {
@@ -388,6 +418,11 @@ namespace Ground_base_software
         private void button1_Click(object sender, EventArgs e)
         {
             StartPlayback(PortVID.ToString());
+        }
+
+        private void label13_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

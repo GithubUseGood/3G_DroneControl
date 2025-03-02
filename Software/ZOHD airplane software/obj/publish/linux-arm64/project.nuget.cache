@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "KRXqk1Ivjbg=",
+  "dgSpecHash": "a8N4pouE9v4=",
   "success": true,
   "projectFilePath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\ZOHD airplane software\\ZOHD airplane software.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\iot.device.bindings\\3.2.0\\iot.device.bindings.3.2.0.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",
-    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.11\\microsoft.net.illink.tasks.8.0.11.nupkg.sha512",
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.12\\microsoft.net.illink.tasks.8.0.12.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
@@ -111,9 +111,9 @@
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.raspberry.io\\0.27.1\\unosquare.raspberry.io.0.27.1.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.swan\\3.0.0\\unosquare.swan.3.0.0.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.swan.lite\\3.0.0\\unosquare.swan.lite.3.0.0.nupkg.sha512",
-    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm64\\8.0.11\\microsoft.netcore.app.runtime.linux-arm64.8.0.11.nupkg.sha512",
-    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm64\\8.0.11\\microsoft.aspnetcore.app.runtime.linux-arm64.8.0.11.nupkg.sha512",
-    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm64\\8.0.11\\microsoft.netcore.app.host.linux-arm64.8.0.11.nupkg.sha512"
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm64\\8.0.12\\microsoft.netcore.app.runtime.linux-arm64.8.0.12.nupkg.sha512",
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm64\\8.0.12\\microsoft.aspnetcore.app.runtime.linux-arm64.8.0.12.nupkg.sha512",
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm64\\8.0.12\\microsoft.netcore.app.host.linux-arm64.8.0.12.nupkg.sha512"
   ],
   "logs": []
 }
