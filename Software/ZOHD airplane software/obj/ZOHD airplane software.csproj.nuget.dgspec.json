@@ -63,6 +63,10 @@
             "Unosquare.Raspberry.IO": {
               "target": "Package",
               "version": "[0.27.1, )"
+            },
+            "WebRtc.NET": {
+              "target": "Package",
+              "version": "[1.75.0.1-Alpha, )"
             }
           },
           "imports": [

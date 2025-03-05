@@ -964,3 +964,12 @@ D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Vlc.DotNet.Core.Interops.dll
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Vlc.DotNet.Forms.dll
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\obj\Debug\net8.0-windows\Ground base software.sourcelink.json
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\runtimes\win-x86\native\WebView2Loader.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\runtimes\win-x64\native\WebView2Loader.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\runtimes\win-arm64\native\WebView2Loader.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Core.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.WinForms.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Wpf.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Core.xml
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.WinForms.xml
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Web.WebView2.Wpf.xml

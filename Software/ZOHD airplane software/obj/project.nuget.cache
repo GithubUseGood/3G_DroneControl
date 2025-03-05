@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LltHUByu8Q4=",
+  "dgSpecHash": "oK2TK5wrZ98=",
   "success": true,
   "projectFilePath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\ZOHD airplane software\\ZOHD airplane software.csproj",
   "expectedPackageFiles": [
@@ -84,7 +84,8 @@
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.raspberry.abstractions\\0.4.1\\unosquare.raspberry.abstractions.0.4.1.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.raspberry.io\\0.27.1\\unosquare.raspberry.io.0.27.1.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.swan\\3.0.0\\unosquare.swan.3.0.0.nupkg.sha512",
-    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.swan.lite\\3.0.0\\unosquare.swan.lite.3.0.0.nupkg.sha512"
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\unosquare.swan.lite\\3.0.0\\unosquare.swan.lite.3.0.0.nupkg.sha512",
+    "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\webrtc.net\\1.75.0.1-alpha\\webrtc.net.1.75.0.1-alpha.nupkg.sha512"
   ],
   "logs": []
 }

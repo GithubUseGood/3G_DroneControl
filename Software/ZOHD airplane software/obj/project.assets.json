@@ -1403,6 +1403,29 @@
             "related": ".xml"
           }
         }
+      },
+      "WebRtc.NET/1.75.0.1-Alpha": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win10-x64/native/libOrg.WebRtc.WrapperC.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/libOrg.WebRtc.WrapperC.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
       }
     }
   },
@@ -4447,13 +4470,31 @@
         "unosquare.swan.lite.3.0.0.nupkg.sha512",
         "unosquare.swan.lite.nuspec"
       ]
+    },
+    "WebRtc.NET/1.75.0.1-Alpha": {
+      "sha512": "KvaomB/7eh4hFAjpqiBafbIFkcL7HW56vc1RgmtxENY5LfJNE3thofkK43hNWsxcHdF8Sv5JgQkl3PJ3gweJbQ==",
+      "type": "package",
+      "path": "webrtc.net/1.75.0.1-alpha",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "build/webrtc.win.targets",
+        "lib/netstandard2.0/Org.webrtc.dll",
+        "lib/netstandard2.0/Org.webrtc.pdb",
+        "runtimes/win10-x64/native/libOrg.WebRtc.WrapperC.dll",
+        "runtimes/win10-x86/native/libOrg.WebRtc.WrapperC.dll",
+        "webrtc.net.1.75.0.1-alpha.nupkg.sha512",
+        "webrtc.net.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Iot.Device.Bindings >= 3.2.0",
       "System.Device.Gpio >= 3.2.0",
-      "Unosquare.Raspberry.IO >= 0.27.1"
+      "Unosquare.Raspberry.IO >= 0.27.1",
+      "WebRtc.NET >= 1.75.0.1-Alpha"
     ]
   },
   "packageFolders": {
@@ -4520,6 +4561,10 @@
           "Unosquare.Raspberry.IO": {
             "target": "Package",
             "version": "[0.27.1, )"
+          },
+          "WebRtc.NET": {
+            "target": "Package",
+            "version": "[1.75.0.1-Alpha, )"
           }
         },
         "imports": [

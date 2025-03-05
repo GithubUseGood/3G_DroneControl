@@ -41,7 +41,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.12": {
+      "Microsoft.NET.ILLink.Tasks/8.0.13": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -1409,6 +1409,29 @@
             "related": ".xml"
           }
         }
+      },
+      "WebRtc.NET/1.75.0.1-Alpha": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win10-x64/native/libOrg.WebRtc.WrapperC.dll": {
+            "assetType": "native",
+            "rid": "win10-x64"
+          },
+          "runtimes/win10-x86/native/libOrg.WebRtc.WrapperC.dll": {
+            "assetType": "native",
+            "rid": "win10-x86"
+          }
+        }
       }
     },
     "net8.0/linux-arm64": {
@@ -1451,7 +1474,7 @@
           "buildTransitive/net6.0/Microsoft.Extensions.Logging.Abstractions.targets": {}
         }
       },
-      "Microsoft.NET.ILLink.Tasks/8.0.12": {
+      "Microsoft.NET.ILLink.Tasks/8.0.13": {
         "type": "package",
         "build": {
           "build/Microsoft.NET.ILLink.Tasks.props": {}
@@ -2939,6 +2962,19 @@
             "related": ".xml"
           }
         }
+      },
+      "WebRtc.NET/1.75.0.1-Alpha": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "related": ".pdb"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "related": ".pdb"
+          }
+        }
       }
     }
   },
@@ -3031,10 +3067,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "Microsoft.NET.ILLink.Tasks/8.0.12": {
-      "sha512": "FV4HnQ3JI15PHnJ5PGTbz+rYvrih42oLi/7UMIshNwCwUZhTq13UzrggtXk4ygrcMcN+4jsS6hhshx2p/Zd0ig==",
+    "Microsoft.NET.ILLink.Tasks/8.0.13": {
+      "sha512": "R19ZTaRiQAK+xo9ZwaHbF/1vb1wwR1Wn5+sqp9v8+CDjbdS8R6qftKdw0VSXWKm7VAMi7P+NCU4zxDzhEWcAwQ==",
       "type": "package",
-      "path": "microsoft.net.illink.tasks/8.0.12",
+      "path": "microsoft.net.illink.tasks/8.0.13",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -3048,7 +3084,7 @@
         "build/Microsoft.NET.ILLink.Analyzers.props",
         "build/Microsoft.NET.ILLink.Tasks.props",
         "build/Microsoft.NET.ILLink.targets",
-        "microsoft.net.illink.tasks.8.0.12.nupkg.sha512",
+        "microsoft.net.illink.tasks.8.0.13.nupkg.sha512",
         "microsoft.net.illink.tasks.nuspec",
         "tools/net472/ILLink.Tasks.dll",
         "tools/net472/ILLink.Tasks.dll.config",
@@ -6645,14 +6681,32 @@
         "unosquare.swan.lite.3.0.0.nupkg.sha512",
         "unosquare.swan.lite.nuspec"
       ]
+    },
+    "WebRtc.NET/1.75.0.1-Alpha": {
+      "sha512": "KvaomB/7eh4hFAjpqiBafbIFkcL7HW56vc1RgmtxENY5LfJNE3thofkK43hNWsxcHdF8Sv5JgQkl3PJ3gweJbQ==",
+      "type": "package",
+      "path": "webrtc.net/1.75.0.1-alpha",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "build/webrtc.win.targets",
+        "lib/netstandard2.0/Org.webrtc.dll",
+        "lib/netstandard2.0/Org.webrtc.pdb",
+        "runtimes/win10-x64/native/libOrg.WebRtc.WrapperC.dll",
+        "runtimes/win10-x86/native/libOrg.WebRtc.WrapperC.dll",
+        "webrtc.net.1.75.0.1-alpha.nupkg.sha512",
+        "webrtc.net.nuspec"
+      ]
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "Iot.Device.Bindings >= 3.2.0",
-      "Microsoft.NET.ILLink.Tasks >= 8.0.12",
+      "Microsoft.NET.ILLink.Tasks >= 8.0.13",
       "System.Device.Gpio >= 3.2.0",
-      "Unosquare.Raspberry.IO >= 0.27.1"
+      "Unosquare.Raspberry.IO >= 0.27.1",
+      "WebRtc.NET >= 1.75.0.1-Alpha"
     ]
   },
   "packageFolders": {
@@ -6715,7 +6769,7 @@
           "Microsoft.NET.ILLink.Tasks": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[8.0.12, )",
+            "version": "[8.0.13, )",
             "autoReferenced": true
           },
           "System.Device.Gpio": {
@@ -6725,6 +6779,10 @@
           "Unosquare.Raspberry.IO": {
             "target": "Package",
             "version": "[0.27.1, )"
+          },
+          "WebRtc.NET": {
+            "target": "Package",
+            "version": "[1.75.0.1-Alpha, )"
           }
         },
         "imports": [
@@ -6741,15 +6799,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.linux-arm64",
-            "version": "[8.0.12, 8.0.12]"
+            "version": "[8.0.13, 8.0.13]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.linux-arm64",
-            "version": "[8.0.12, 8.0.12]"
+            "version": "[8.0.13, 8.0.13]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.linux-arm64",
-            "version": "[8.0.12, 8.0.12]"
+            "version": "[8.0.13, 8.0.13]"
           }
         ],
         "frameworkReferences": {
@@ -6757,7 +6815,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.405/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.406/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

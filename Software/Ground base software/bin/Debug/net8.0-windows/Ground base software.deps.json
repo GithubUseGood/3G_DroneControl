@@ -10,10 +10,14 @@
         "dependencies": {
           "LibVLCSharp": "3.9.0",
           "LibVLCSharp.WinForms": "3.9.0",
+          "Microsoft.Web.WebView2": "1.0.3065.39",
           "Mono.Nat": "3.0.4",
           "SharpDX.XInput": "4.2.0",
           "Vlc.DotNet.Forms": "3.1.0",
           "VideoLAN.LibVLC.Windows": "3.0.20",
+          "Microsoft.Web.WebView2.Core": "1.0.3065.39",
+          "Microsoft.Web.WebView2.WinForms": "1.0.3065.39",
+          "Microsoft.Web.WebView2.Wpf": "1.0.3065.39",
           "Interop.WMPLib": "1.0.0.0",
           "AxInterop.WMPLib": "1.0.0.0"
         },
@@ -42,6 +46,25 @@
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
       "Microsoft.NETCore.Targets/1.1.0": {},
+      "Microsoft.Web.WebView2/1.0.3065.39": {
+        "runtimeTargets": {
+          "runtimes/win-arm64/native/WebView2Loader.dll": {
+            "rid": "win-arm64",
+            "assetType": "native",
+            "fileVersion": "1.0.3065.39"
+          },
+          "runtimes/win-x64/native/WebView2Loader.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "1.0.3065.39"
+          },
+          "runtimes/win-x86/native/WebView2Loader.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "1.0.3065.39"
+          }
+        }
+      },
       "Microsoft.Win32.Primitives/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "1.1.0",
@@ -768,6 +791,30 @@
           }
         }
       },
+      "Microsoft.Web.WebView2.Core/1.0.3065.39": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Core.dll": {
+            "assemblyVersion": "1.0.3065.39",
+            "fileVersion": "1.0.3065.39"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.WinForms/1.0.3065.39": {
+        "runtime": {
+          "Microsoft.Web.WebView2.WinForms.dll": {
+            "assemblyVersion": "1.0.3065.39",
+            "fileVersion": "1.0.3065.39"
+          }
+        }
+      },
+      "Microsoft.Web.WebView2.Wpf/1.0.3065.39": {
+        "runtime": {
+          "Microsoft.Web.WebView2.Wpf.dll": {
+            "assemblyVersion": "1.0.3065.39",
+            "fileVersion": "1.0.3065.39"
+          }
+        }
+      },
       "Interop.WMPLib/1.0.0.0": {
         "runtime": {
           "Interop.WMPLib.dll": {
@@ -819,6 +866,13 @@
       "sha512": "sha512-aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "path": "microsoft.netcore.targets/1.1.0",
       "hashPath": "microsoft.netcore.targets.1.1.0.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2/1.0.3065.39": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ww6ToZ2jpHyP4k3DCQJETjKcdVS1cha9pS8dV2NetyfafItxz08wcAyQV0Yl86W7euhI02UJWEaC5sM8WLr0tQ==",
+      "path": "microsoft.web.webview2/1.0.3065.39",
+      "hashPath": "microsoft.web.webview2.1.0.3065.39.nupkg.sha512"
     },
     "Microsoft.Win32.Primitives/4.3.0": {
       "type": "package",
@@ -1365,6 +1419,21 @@
       "sha512": "sha512-B40j4tmKKwLz4O+BfVv7t5Yeygq4nkSBNJXFr7VQfoVU3a4WLFSisR1FxOnBwM/soM2/BIJuNhICCIF+C5XHWA==",
       "path": "vlc.dotnet.forms/3.1.0",
       "hashPath": "vlc.dotnet.forms.3.1.0.nupkg.sha512"
+    },
+    "Microsoft.Web.WebView2.Core/1.0.3065.39": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.WinForms/1.0.3065.39": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Web.WebView2.Wpf/1.0.3065.39": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
     },
     "Interop.WMPLib/1.0.0.0": {
       "type": "reference",

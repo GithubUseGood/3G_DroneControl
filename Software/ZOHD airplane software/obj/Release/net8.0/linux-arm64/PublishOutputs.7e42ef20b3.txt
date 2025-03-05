@@ -1,3 +1,2 @@
 D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\publish\linux-arm64\ZOHD.pdb
-D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\publish\linux-arm64\libSystem.IO.Ports.Native.so
 D:\ZOHD software\ZOHD-UDP\Software\ZOHD airplane software\bin\Release\net8.0\publish\linux-arm64\ZOHD

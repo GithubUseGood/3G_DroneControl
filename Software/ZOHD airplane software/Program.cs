@@ -12,8 +12,7 @@ namespace ZOHD_airplane_software
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
 
-        private static IPAddress HostIp = Dns.GetHostAddresses("z0hd.ddns.net")[0]; // no need to pay for an domain you can get some for free at noip.com
-        private static IPAddress ProxyIp = Dns.GetHostAddresses("zohdserver.ddns.net")[0]; // no need to pay for an domain you can get some for free at noip.com
+        private static IPAddress TailScaleIP = Dns.GetHostAddresses("stankompjuter.tail5bbbe4.ts.net")[0]; // no need to pay for an domain you can get some for free at noip.com
 
 
         private static UdpClient _client = new UdpClient(9999);
@@ -31,26 +30,19 @@ namespace ZOHD_airplane_software
 
         static async Task Main(string[] args)
         {
-            Console.WriteLine($"Welcome {DateTime.Now}\n Would you like to use a Proxy? Y/N");
-            string response = Console.ReadLine();
-            if (response == "Y" || response == "y") 
+            Console.WriteLine($"Welcome {DateTime.Now}");
+            try
             {
-                NegotiationClient.Connect(ProxyIp, NegotiationPort);
-                await NegotiationClient.SendAsync(Encoding.UTF8.GetBytes(Key));
-                Console.WriteLine("Sent key to proxy");
-                UdpReceiveResult result = await NegotiationClient.ReceiveAsync();
-                List<int> Ports = UDP_Communication.ExtractPorts(Encoding.UTF8.GetString(result.Buffer));
-                PortTXT = Ports[0];
-                PortVID = Ports[1];
-                HostIp = ProxyIp;
-
-               
+                Console.WriteLine($"Controller IP is {TailScaleIP.ToString}");
             }
-
-
+            catch 
+            {
+                Console.WriteLine($"Failed to resolve hostname to ip. Change hostname?");
+                TailScaleIP = Dns.GetHostAddresses(Console.ReadLine())[0];
+            }
            
             ServoControllerPca = Controls.ConnectServoController();
-            Console.WriteLine("HOST:" + HostIp.ToString() + " PORTS: VID: " + PortVID);
+            Console.WriteLine("HOST:" + TailScaleIP.ToString() + " PORTS: VID: " + PortVID);
             OutputStatus.Start();
             StartUDPcomms();
 
@@ -59,13 +51,13 @@ namespace ZOHD_airplane_software
 
         static async Task StartUDPcomms() 
         {
-            _client.Connect(HostIp, PortTXT);
+            _client.Connect(TailScaleIP, PortTXT);
            
-            Console.WriteLine("sending UDP to: " + HostIp + ":" + PortTXT);
+            Console.WriteLine("sending UDP to: " + TailScaleIP + ":" + PortTXT);
             Console.WriteLine("reading UDP on: any ip and on port " + PortTXT);
             Task.Run(() => SendUDP(_client));
             Task.Run(() => RecieveUDP(_client));
-            Task.Run(() => UDP_Communication.SendVideo(HostIp + ":" + PortVID.ToString()));
+            Task.Run(() => UDP_Communication.SendVideo(TailScaleIP + ":" + PortVID.ToString()));
 
 
         }

@@ -21,16 +21,16 @@ namespace Ground_base_software
     public partial class Form1 : Form
     {
 
-       
-       
 
-        public static bool UseProxy { get; set; }
+
+        private static string TailscaleIP = "uav.tail5bbbe4.ts.net";
+        private static IPEndPoint tailscaleEndPoint;
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
         private static int NegotiationPort = 9901;
       
         private static UdpClient NegotiationClient = new UdpClient();
-        private static IPEndPoint HostIp = new IPEndPoint(IPAddress.Any, PortTXT);
+        
         private static UdpClient _client = new UdpClient(PortTXT);
 
         private static UdpClient _NATpuncherTXT = new UdpClient();
@@ -57,16 +57,8 @@ namespace Ground_base_software
         public Form1()
         {
             InitializeComponent();
-            DialogResult result = MessageBox.Show("Welcome! Do you want to use PeerJS", "ZOHD", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-            if (result == DialogResult.Yes)
-            {
-                Form1.UseProxy = true;
-            }
-            else
-            {
-                Form1.UseProxy = false;
-            }
+            
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -84,21 +76,10 @@ namespace Ground_base_software
             Label6.Text = "Loading...";
             Label7.Text = "Loading...";
             IPlabel.Text = "Loading...";
-            if (Form1.UseProxy == false)
-            {
-                Upnp.Setup();
-                await Upnp.WaitForDeviceConnection();
-                Upnp.PortForward(PortTXT, PortTXT);
-                Upnp.PortForward(9998, 9998);
-                Upnp.PortForward(PortVID, PortVID);
+            
                 ProxyLabel.Text = "Proxy: OFF";
                 
-            }
-            else 
-            {
-               
-
-            }
+          
 
 
             // port forward for testing porpuses // 
@@ -114,9 +95,9 @@ namespace Ground_base_software
         {
             Controller controler = controllerClass.ConnectControler();
 
-            HostIp = await UDP_Communication.CaptureIpFromMessage(_client);
-
-            _client.Connect(HostIp);
+            tailscaleEndPoint = await UDP_Communication.CaptureIpFromMessage(_client);
+            MessageBox.Show(tailscaleEndPoint.Address.ToString());
+            _client.Connect(tailscaleEndPoint);
 
             Task.Run(() => SendUDP(_client, controler));
             Task.Run(() => RecieveUDP(_client));
@@ -339,7 +320,7 @@ namespace Ground_base_software
                         if (IsLabelSafeToEdit(IPlabel))
                         {
                             //  IPlabel.Invoke(new Action(() => IPlabel.Text=IPlabel.ToString()));
-                            IPlabel.Invoke(new Action(() => IPlabel.Text = HostIp.ToString()));
+                            IPlabel.Invoke(new Action(() => IPlabel.Text = TailscaleIP.ToString()));
                             IPlabel.Invoke(new Action(() => IPlabel.ForeColor = Color.Green));
                         }
                     }

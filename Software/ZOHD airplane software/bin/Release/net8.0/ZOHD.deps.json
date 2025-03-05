@@ -10,7 +10,8 @@
         "dependencies": {
           "Iot.Device.Bindings": "3.2.0",
           "System.Device.Gpio": "3.2.0",
-          "Unosquare.Raspberry.IO": "0.27.1"
+          "Unosquare.Raspberry.IO": "0.27.1",
+          "WebRtc.NET": "1.75.0.1-Alpha"
         },
         "runtime": {
           "ZOHD.dll": {}
@@ -750,6 +751,26 @@
             "fileVersion": "3.0.0.0"
           }
         }
+      },
+      "WebRtc.NET/1.75.0.1-Alpha": {
+        "runtime": {
+          "lib/netstandard2.0/Org.webrtc.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win10-x64/native/libOrg.WebRtc.WrapperC.dll": {
+            "rid": "win10-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win10-x86/native/libOrg.WebRtc.WrapperC.dll": {
+            "rid": "win10-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
       }
     }
   },
@@ -1325,6 +1346,13 @@
       "sha512": "sha512-noPwJJl1Q9uparXy1ogtkmyAPGNfSGb0BLT1292nFH1jdMKje6o2kvvrQUvF9Xklj+IoiAI0UzF6Aqxlvo10lw==",
       "path": "unosquare.swan.lite/3.0.0",
       "hashPath": "unosquare.swan.lite.3.0.0.nupkg.sha512"
+    },
+    "WebRtc.NET/1.75.0.1-Alpha": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-KvaomB/7eh4hFAjpqiBafbIFkcL7HW56vc1RgmtxENY5LfJNE3thofkK43hNWsxcHdF8Sv5JgQkl3PJ3gweJbQ==",
+      "path": "webrtc.net/1.75.0.1-alpha",
+      "hashPath": "webrtc.net.1.75.0.1-alpha.nupkg.sha512"
     }
   }
 }
