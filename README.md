@@ -1,4 +1,4 @@
-# The Aero Duel Project
+# 3G drone control
 
 ## 🎯 Goal
 The objective of this project is to create affordable, easy-to-build RC airplanes.
