@@ -42,9 +42,9 @@ namespace PeerToPeerTest
             State state;
             state = controller.GetState();
             string message = "";
-            message = MapValue(state.Gamepad.LeftThumbY, -32767, 32767, 1, 180) + "q"
+            message = MapValue(state.Gamepad.RightThumbY, -32767, 32767, 1, 360) + "q"
              + MapValue(state.Gamepad.RightThumbX, -32767, 32767, 1, 180) + "w"
-              + MapValue(state.Gamepad.RightThumbY, -32767, 32767, 1, 180) + "e"
+              + MapValue(state.Gamepad.LeftThumbY, -32767, 32767, 1, 300) + "e"
                + MapValue(state.Gamepad.LeftThumbX, -32767, 32767, 1, 180) + "r";
             if (state.Gamepad.Buttons.HasFlag(GamepadButtonFlags.Y))
             {
