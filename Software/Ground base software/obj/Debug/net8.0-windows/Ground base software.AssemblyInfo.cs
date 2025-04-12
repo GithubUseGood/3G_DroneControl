@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Ground base software")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+03267e60519182fc196b1ab1da8a5e2326b90c24")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9cd57b961c6fa7ddedc2acc8112b809a5084cb15")]
 [assembly: System.Reflection.AssemblyProductAttribute("Ground base software")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Ground base software")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
