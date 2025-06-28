@@ -79,10 +79,6 @@ namespace Ground_base_software
             
                 ProxyLabel.Text = "Proxy: OFF";
                 
-          
-
-
-            // port forward for testing porpuses // 
 
 
             Task.Run(() => StartPlayback(PortVID.ToString()));
@@ -96,7 +92,6 @@ namespace Ground_base_software
             Controller controler = controllerClass.ConnectControler();
 
             tailscaleEndPoint = await UDP_Communication.CaptureIpFromMessage(_client);
-            MessageBox.Show(tailscaleEndPoint.Address.ToString());
             _client.Connect(tailscaleEndPoint);
 
             Task.Run(() => SendUDP(_client, controler));

@@ -12,6 +12,7 @@ namespace UDPtest
     using Unosquare.RaspberryIO;
     using System.Runtime.InteropServices;
     using System.Device.I2c;
+    using System.Threading;
 
     /// <summary>
     /// Control servo motors using PCA9685
@@ -95,34 +96,33 @@ namespace UDPtest
             pca9685.SetDutyCycle(channel, dutyCycle); // Set the duty cycle for the specified channel
         }
 
+        static readonly CancellationTokenSource _cts = new();
+
         static async Task I2C_on_exit_cleanUp(Pca9685 pca)
         {
-            var cts = new CancellationTokenSource();
+            // Only attach once
             Console.CancelKeyPress += (sender, e) =>
             {
-                e.Cancel = true; // Prevent immediate termination
+                e.Cancel = true;
                 Console.WriteLine("\nCtrl+C detected! Cleaning up...");
-                cts.Cancel(); // Trigger cancellation
+                _cts.Cancel(); // Trigger cancellation
             };
 
             try
             {
-                // Wait until Ctrl+C is pressed (non-blocking)
-                await Task.Delay(Timeout.Infinite, cts.Token);
+                await Task.Delay(Timeout.Infinite, _cts.Token);
             }
             catch (TaskCanceledException)
             {
-                // Expected exception when cancellation token is triggered
+                // Expected when cancellation happens
             }
             finally
             {
-                // Cleanup I²C resources
                 pca?.Dispose();
                 Console.WriteLine("I²C connection closed.");
                 Environment.Exit(0);
             }
         }
-
         private static class ControllerStateParser
         {
             public static (int LeftThumbY, int LeftThumbX, int RightThumbX, int RightThumbY, bool YButton, bool BButton) UnpackState(string message)

@@ -12,7 +12,7 @@ namespace ZOHD_airplane_software
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
 
-        private static IPAddress TailScaleIP = Dns.GetHostAddresses("stankompjuter.tail5bbbe4.ts.net")[0]; // no need to pay for an domain you can get some for free at noip.com
+        private static IPAddress TailScaleIP = Dns.GetHostAddresses("stankompjuter.tail5bbbe4.ts.net")[0]; // tailscale static IP you need to setup manually.
 
 
         private static UdpClient _client = new UdpClient(9999);
@@ -64,9 +64,8 @@ namespace ZOHD_airplane_software
         static async Task SendUDP(UdpClient _client)
         {
             while (SendData) 
-            {
-           
-               await UDP_Communication.SendUDP(_client, OutputStatus.GetOutput());
+            { 
+                await UDP_Communication.SendUDP(_client, OutputStatus.GetOutput());
                 Thread.Sleep(30);
             }
         }
