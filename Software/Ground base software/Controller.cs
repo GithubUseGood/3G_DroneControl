@@ -1,7 +1,11 @@
 namespace PeerToPeerTest 
 {
+    using System.IO;
     using System.IO.Ports;
+    using Ground_base_software;
     using SharpDX.XInput;
+    using ZOHD_airplane_software;
+
     public static class controllerClass
     {
         public static Controller ConnectControler(bool FastConnect=false)
@@ -11,23 +15,13 @@ namespace PeerToPeerTest
             try
             {
                 controller = new Controller(UserIndex.One);
-
-
-
             }
             catch (Exception e)
             {
                 MessageBox.Show("Error: " + e + " Press any key to attempt again");
-            
-             
                 ConnectControler();
             }
-            if (controller.IsConnected == true)
-            {
-            
-
-            }
-            else
+            if (controller.IsConnected != true)
             {
                 if (FastConnect == true)
                 {
@@ -37,11 +31,9 @@ namespace PeerToPeerTest
                 else
                 {
                     MessageBox.Show("Controller not found Retrying in 5 seconds");
-
                     Thread.Sleep(5000);
                     ConnectControler();
                 }
-             
             }
             return controller;
         }
@@ -53,10 +45,16 @@ namespace PeerToPeerTest
                controller = ConnectControler(true);
             }
 
-
             State state;
             state = controller.GetState();
             string message = "";
+            var configs = ConfigTools.GetConfigs();
+            foreach (var config in configs) 
+            {
+                message = message + $"Q{MapValue(ConfigTools.GetAxisValue(config.ControllerAxis, state), 0, 1, config.MinAngle, config.MaxAngle)}TO{config.ServoAddress}"; 
+            }
+            
+            /*
             message = MapValue(state.Gamepad.RightThumbY, -32767, 32767, 1, 360) + "q"
              + MapValue(state.Gamepad.RightThumbX, -32767, 32767, 1, 180) + "w"
               + MapValue(state.Gamepad.LeftThumbY, -32767, 32767, 1, 180) + "e"
@@ -77,14 +75,16 @@ namespace PeerToPeerTest
             {
                 message = message + "F";
             }
+            */
 
             return message;
 
         }
 
-        static int MapValue(int oldValue, int oldMin, int oldMax, int newMin, int newMax)
+        static float MapValue(float oldValue, float oldMin, float oldMax, float newMin, float newMax)
         {
-            return (int)(((double)(oldValue - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin);
+            return ((oldValue - oldMin) / (oldMax - oldMin)) * (newMax - newMin) + newMin;
         }
+
     }
 }

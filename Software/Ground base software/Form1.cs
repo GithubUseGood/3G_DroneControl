@@ -57,7 +57,7 @@ namespace Ground_base_software
         public Form1()
         {
             InitializeComponent();
-
+            
             
         }
 
@@ -111,7 +111,6 @@ namespace Ground_base_software
             while (SendData)
             {
                 await UDP_Communication.SendUDP(_client, controllerClass.GetOutput(controler));
-
                 Thread.Sleep(10);
             }
         }
@@ -121,21 +120,13 @@ namespace Ground_base_software
             Task.Run(() => UpdateUI());
             while (ReadData)
             {
-
                 RecievedMessage = await UDP_Communication.ReadUDP(_client);
-
-
             }
         }
         private static async Task StartPlayback(string streamUri)
         {
-
             string command = "ffplay";
             string arguments = @"-flags low_delay -an -probesize 3M -analyzeduration 1M -i udp://0.0.0.0:" + PortVID;
-
-
-
-
 
             // Create a new process
             Process process = new Process();

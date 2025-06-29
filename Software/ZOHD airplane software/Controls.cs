@@ -13,6 +13,7 @@ namespace UDPtest
     using System.Runtime.InteropServices;
     using System.Device.I2c;
     using System.Threading;
+    using ZOHD_airplane_software;
 
     /// <summary>
     /// Control servo motors using PCA9685
@@ -67,11 +68,11 @@ namespace UDPtest
 
             try
             {
-             
-                var unpackedState = ControllerStateParser.UnpackState(message);
-                SetServoAngle(pca, 0, unpackedState.LeftThumbY);
-                SetServoAngle(pca, 1, unpackedState.RightThumbX);
-                SetServoAngle(pca, 2, unpackedState.RightThumbY);
+                var Instructions = UnpackMessageTools.UnpackMessages(message);
+                foreach (var instruction in Instructions) 
+                {
+                    SetServoAngle(pca, instruction.adress, instruction.angle);
+                }
             }
             finally
             {
@@ -81,7 +82,7 @@ namespace UDPtest
 
         private static void SetServoAngle(Pca9685 pca9685, int channel, int angle)
         {
-         
+
             if (pca9685 == null)
             {
                 Console.WriteLine("PCA9685 not initialized.");
@@ -123,52 +124,10 @@ namespace UDPtest
                 Environment.Exit(0);
             }
         }
-        private static class ControllerStateParser
-        {
-            public static (int LeftThumbY, int LeftThumbX, int RightThumbX, int RightThumbY, bool YButton, bool BButton) UnpackState(string message)
-            {
-                // Declare variables
-                int leftThumbY = 0, leftThumbX = 0, rightThumbX = 0, rightThumbY = 0;
-                bool yButtonPressed = false, bButtonPressed = false;
 
-                try
-                {
-                
+        
 
-                    // Ensure the message has the expected length and structure
-                    if (message.Length < 10 || !message.Contains("q") || !message.Contains("w") || !message.Contains("e") || !message.Contains("r"))
-                    {
-                        throw new ArgumentException("Invalid message format.");
-                    }
-
-          
-
-                    // Extract joystick values
-                    leftThumbY = int.Parse(message.Substring(0, message.IndexOf('q'))); // Value before 'q'
-                    leftThumbX = int.Parse(message.Substring(message.IndexOf('q') + 1, message.IndexOf('w') - message.IndexOf('q') - 1)); // Between 'q' and 'w'
-                    rightThumbX = int.Parse(message.Substring(message.IndexOf('w') + 1, message.IndexOf('e') - message.IndexOf('w') - 1)); // Between 'w' and 'e'
-                    rightThumbY = int.Parse(message.Substring(message.IndexOf('e') + 1, message.IndexOf('r') - message.IndexOf('e') - 1)); // Between 'e' and 'r'
-
-         
-
-                    // Parse button states
-                    yButtonPressed = message[message.IndexOf('r') + 1] == 'T';
-                    bButtonPressed = message[message.IndexOf('r') + 2] == 'T';
-
-                
-                }
-                catch (Exception ex)
-                {
-
-                    Console.Clear();
-                    Console.WriteLine($"Error parsing message: {ex.Message}");
-                    Console.WriteLine($"Current parsed values: LeftThumbY={leftThumbY}, LeftThumbX={leftThumbX}, RightThumbX={rightThumbX}, RightThumbY={rightThumbY}, YButton={yButtonPressed}, BButton={bButtonPressed}");
-                    throw;
-                }
-
-                // Return unpacked data
-                return (leftThumbY, leftThumbX, rightThumbX, rightThumbY, yButtonPressed, bButtonPressed);
-            }
-        }
     }
+
+ 
 }

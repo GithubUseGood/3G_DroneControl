@@ -13,14 +13,11 @@ namespace ZOHD_airplane_software
         private static int PortVID = 9990;
 
         private static IPAddress TailScaleIP = Dns.GetHostAddresses("stankompjuter.tail5bbbe4.ts.net")[0]; // tailscale static IP you need to setup manually.
-
-
         private static UdpClient _client = new UdpClient(9999);
         private static UdpClient _clientVideo = new UdpClient(PortVID);
         private static Pca9685 ServoControllerPca;
         private static bool ReadData = true;
         private static bool SendData = true;
-
         private static string Key = "AVIJON1";
         private static int NegotiationPort = 9900;
         private static UdpClient NegotiationClient = new UdpClient();
