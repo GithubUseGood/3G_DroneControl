@@ -27,5 +27,9 @@ The objective of this project is to create affordable, easy-to-build RC airplane
 ## 🤝 Contributing
 Contributions are welcome! Please submit issues or pull requests for any suggestions or improvements.
 
+### 📄 License
+This project is licensed for non-commercial use.  
+For commercial licensing, contact: drone-project.diner481@slmail.me
+
 ---
 *Happy flying and happy coding!*
