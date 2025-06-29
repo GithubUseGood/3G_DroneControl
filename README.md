@@ -1,4 +1,4 @@
-# 3G drone control
+#Mobile data drone control
 
 ## 🎯 Goal
 The objective of this project is to create affordable, easy-to-build RC airplanes/drones ect. Low latency 3G.
