@@ -5,7 +5,7 @@ The objective of this project is to create affordable, easy-to-build RC airplane
 
 ## 🛠️ Parts List
 - **Raspberry Pi Zero 2 W**  
-  The main controller of the airplane, running light server distribution CLI for processing and control tasks. For the .img feel free to reach out. But it should work in any .net enviorment.
+  The main controller of the airplane, running light server distribution CLI for processing and control tasks. [Raspberrypi disk image download link](https://www.dropbox.com/scl/fi/6emmwnl3nn47dhc098f74/RPI2W_3Gcontrol.rar?rlkey=m8sl33uylj7zco0t74orxoeaf&e=1&st=ldmvazoj&dl=0). But it should work in any .net enviorment.
 - **3G Modem**  
   Connected via USB to the Raspberry Pi Zero 2 W. Provides internet connection.
 - **USB camera**  
