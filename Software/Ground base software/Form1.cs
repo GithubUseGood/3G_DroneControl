@@ -111,6 +111,7 @@ namespace Ground_base_software
             while (SendData)
             {
                 await UDP_Communication.SendUDP(_client, controllerClass.GetOutput(controler));
+               // MessageBox.Show(controllerClass.GetOutput(controler));
                 Thread.Sleep(10);
             }
         }

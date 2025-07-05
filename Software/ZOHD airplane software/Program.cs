@@ -12,7 +12,7 @@ namespace ZOHD_airplane_software
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
 
-        private static IPAddress TailScaleIP = Dns.GetHostAddresses("stankompjuter.tail5bbbe4.ts.net")[0]; // tailscale static IP you need to setup manually.
+        private static IPAddress TailScaleIP;
         private static UdpClient _client = new UdpClient(9999);
         private static UdpClient _clientVideo = new UdpClient(PortVID);
         private static Pca9685 ServoControllerPca;
@@ -27,6 +27,15 @@ namespace ZOHD_airplane_software
 
         static async Task Main(string[] args)
         {
+            try
+            {
+                TailScaleIP = Dns.GetHostAddresses(UDP_Communication.GetFirstOnlineMachineHostname())[0]; // tailscale static IP you need to setup manually.
+            }
+            catch 
+            {
+                Console.WriteLine($"couldnt resolve {UDP_Communication.GetFirstOnlineMachineHostname()}");
+            }
+
             Console.WriteLine($"Welcome {DateTime.Now}");
             try
             {

@@ -10,6 +10,64 @@ namespace ZOHD_airplane_software
     class UDP_Communication() 
     {
 
+        public static string GetFirstOnlineMachineHostname()
+        {
+            try
+            {
+                // Run the tailscale status command
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "tailscale",
+                        Arguments = "status",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                // Start the process and capture the output
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                // Print raw output for debugging
+                Console.WriteLine("Tailscale Status Output:");
+                Console.WriteLine(output);
+
+                // Parse the output and find the first online machine's hostname
+                var lines = output.Split('\n');
+
+                foreach (var line in lines)
+                {
+                    if (!line.Contains("offline") && !line.Contains(GetLocalTailscaleIp()))
+                    {
+                        var parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length > 1)
+                        {
+                            string hostname = parts[1];
+                            Console.WriteLine($"Detected: {hostname}");
+                            return hostname;
+                        }
+                        else 
+                        {
+                            Console.WriteLine("fuck chatgpt");
+                        }
+                    }
+                }
+
+                Console.WriteLine("No online machine detected");
+                // If no online machine is found
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
+
         /// <summary>
         /// Returns IPEndPoint from UDP message
         /// </summary>
@@ -18,6 +76,28 @@ namespace ZOHD_airplane_software
             UdpReceiveResult result;
             result = await _client.ReceiveAsync();
             return result.RemoteEndPoint;
+        }
+
+        public static string GetLocalTailscaleIp()
+        {
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "tailscale",
+                    Arguments = "ip --4",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+
+            // The output may contain multiple IPs, so return the first one
+            return output.Split('\n')[0].Trim();
         }
 
         public static List<int> ExtractPorts(string message)

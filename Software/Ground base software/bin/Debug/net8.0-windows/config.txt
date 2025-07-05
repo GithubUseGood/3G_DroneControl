@@ -1,0 +1,38 @@
+[
+  {
+    "ServoAddress": 0,
+    "ControllerAxis": "LeftThumbX",
+    "MaxAngle": 180,
+    "MinAngle": 0
+  },
+  {
+    "ServoAddress": 1,
+    "ControllerAxis": "LeftThumbY",
+    "MaxAngle": 180,
+    "MinAngle": 0
+  },
+  {
+    "ServoAddress": 2,
+    "ControllerAxis": "RightThumbX",
+    "MaxAngle": 180,
+    "MinAngle": 0
+  },
+  {
+    "ServoAddress": 3,
+    "ControllerAxis": "RightThumbY",
+    "MaxAngle": 180,
+    "MinAngle": 0
+  },
+  {
+    "ServoAddress": 4,
+    "ControllerAxis": "LeftTrigger",
+    "MaxAngle": 180,
+    "MinAngle": 0
+  },
+  {
+    "ServoAddress": 5,
+    "ControllerAxis": "RightTrigger",
+    "MaxAngle": 180,
+    "MinAngle": 0
+  }
+]

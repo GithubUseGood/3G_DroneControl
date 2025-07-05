@@ -1,19 +1,25 @@
+using System.Globalization;
+
 namespace ZOHD_airplane_software
 {
     public static class UnpackMessageTools 
     {
-        public static List<Instruction> UnpackMessages(string data) 
+        public static List<Instruction> UnpackMessages(string data)
         {
             var Instructions = new List<Instruction>();
-            while (data != null) // reminder, message must have q in beginning and end
+            while (!string.IsNullOrEmpty(data)) // safer check
             {
                 try
                 {
                     Instruction instruction = new Instruction();
+
                     int start = data.IndexOf('Q');
                     int end = data.IndexOf('T');
 
-                    instruction.angle = int.Parse(data.Substring(start + 1, end - start - 1));
+                    string angleStr = data.Substring(start + 1, end - start - 1);
+                    double angleDouble = double.Parse(angleStr, CultureInfo.InvariantCulture);
+                    instruction.angle = (int)Math.Round(angleDouble);
+
                     data = data.Remove(start, end - start + 1);
 
                     start = data.IndexOf('O');
@@ -25,18 +31,17 @@ namespace ZOHD_airplane_software
                     Instructions.Add(instruction);
 
                 }
-                catch (Exception e) 
+                catch (Exception e)
                 {
                     Console.WriteLine($"Couldnt convert data into instruction {e.Message}");
                     break;
                 }
-
             }
 
             return Instructions;
         }
 
-       
+
 
 
 

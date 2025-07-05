@@ -27,7 +27,6 @@ namespace ZOHD_airplane_software
                 IsTesting = false;
                 Task.Run(() => UpdateData());
             }
-
           
         }
 

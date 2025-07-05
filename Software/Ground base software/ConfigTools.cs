@@ -8,12 +8,24 @@ namespace Ground_base_software
 {
     public static class ConfigTools
     {
+        private static List<Configuration> config = null;
+
         public static List<Configuration> GetConfigs()
         {
-            var Configs = new List<Configuration>();
-            string Data = LoadConfigData();
-            List<Configuration> configs = JsonSerializer.Deserialize<List<Configuration>>(Data);
-            return configs;
+            if (config == null)
+            {
+                var Configs = new List<Configuration>();
+                string Data = LoadConfigData();
+                List<Configuration> configs = JsonSerializer.Deserialize<List<Configuration>>(Data);
+                config = configs.ToList();
+                return configs;
+            }
+            else 
+            {
+                return config;
+            }
+
+         
         }
 
         public static float GetAxisValue(string axisName, State state)
@@ -54,9 +66,10 @@ namespace Ground_base_software
 
         private static string LoadConfigData()
         {
-            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + @"\config.txt"))
-            {
-                MessageBox.Show("Config file not found");
+            var configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.txt");
+            if (!File.Exists(configPath))
+            {     
+                 MessageBox.Show($"Config file not found {AppDomain.CurrentDomain.BaseDirectory}config.txt");
             }
             else
             {
@@ -109,9 +122,26 @@ namespace Ground_base_software
         public string ControllerAxis { get; set; }
         public int MaxAngle { get; set; }
         public int MinAngle { get; set; }
+
+        public Configuration(int servoAddress = 0, string controllerAxis = "X", int maxAngle = 180, int minAngle = 0)
+        {
+            ServoAddress = servoAddress;
+            ControllerAxis = controllerAxis;
+            MaxAngle = maxAngle;
+            MinAngle = minAngle;
+        }
+
+        public void DisplayConfiguration()
+        {
+            Console.WriteLine($"Servo Address: {ServoAddress}");
+            Console.WriteLine($"Controller Axis: {ControllerAxis}");
+            Console.WriteLine($"Max Angle: {MaxAngle}");
+            Console.WriteLine($"Min Angle: {MinAngle}");
+        }
+
     }
 
- 
+
 
 }
 

@@ -8,6 +8,9 @@ namespace PeerToPeerTest
 
     public static class controllerClass
     {
+        
+
+
         public static Controller ConnectControler(bool FastConnect=false)
         {
             Controller controller = new Controller(UserIndex.One);
@@ -51,7 +54,7 @@ namespace PeerToPeerTest
             var configs = ConfigTools.GetConfigs();
             foreach (var config in configs) 
             {
-                message = message + $"Q{MapValue(ConfigTools.GetAxisValue(config.ControllerAxis, state), 0, 1, config.MinAngle, config.MaxAngle)}TO{config.ServoAddress}"; 
+                message = message + $"Q{MapValue(ConfigTools.GetAxisValue(config.ControllerAxis, state), 0, 1, config.MinAngle, config.MaxAngle)}TO{config.ServoAddress}Q"; 
             }
             
             /*

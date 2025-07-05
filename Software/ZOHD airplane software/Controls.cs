@@ -71,6 +71,7 @@ namespace UDPtest
                 var Instructions = UnpackMessageTools.UnpackMessages(message);
                 foreach (var instruction in Instructions) 
                 {
+                    Console.WriteLine($"adress {instruction.adress} angle {instruction.angle}");
                     SetServoAngle(pca, instruction.adress, instruction.angle);
                 }
             }
@@ -88,6 +89,7 @@ namespace UDPtest
                 Console.WriteLine("PCA9685 not initialized.");
                 return;
             }
+         
 
             // Map angle to duty cycle (5% for 0 degrees, 10% for 180 degrees)
             const double minDutyCycle = 0.05;
@@ -95,6 +97,7 @@ namespace UDPtest
             double dutyCycle = minDutyCycle + (maxDutyCycle - minDutyCycle) * angle / 180.0;
 
             pca9685.SetDutyCycle(channel, dutyCycle); // Set the duty cycle for the specified channel
+            
         }
 
         static readonly CancellationTokenSource _cts = new();
