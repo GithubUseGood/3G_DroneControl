@@ -12,6 +12,7 @@
           "LibVLCSharp.WinForms": "3.9.0",
           "Microsoft.Web.WebView2": "1.0.3065.39",
           "Mono.Nat": "3.0.4",
+          "SSH.NET": "2025.0.0",
           "SharpDX.XInput": "4.2.0",
           "Vlc.DotNet.Forms": "3.1.0",
           "VideoLAN.LibVLC.Windows": "3.0.20",
@@ -23,6 +24,14 @@
         },
         "runtime": {
           "Ground base software.dll": {}
+        }
+      },
+      "BouncyCastle.Cryptography/2.5.1": {
+        "runtime": {
+          "lib/net6.0/BouncyCastle.Cryptography.dll": {
+            "assemblyVersion": "2.0.0.0",
+            "fileVersion": "2.5.1.28965"
+          }
         }
       },
       "LibVLCSharp/3.9.0": {
@@ -41,6 +50,25 @@
           "lib/net6.0-windows7.0/LibVLCSharp.WinForms.dll": {
             "assemblyVersion": "3.9.0.0",
             "fileVersion": "3.9.0.0"
+          }
+        }
+      },
+      "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1024.46610"
+          }
+        }
+      },
+      "Microsoft.Extensions.Logging.Abstractions/8.0.3": {
+        "dependencies": {
+          "Microsoft.Extensions.DependencyInjection.Abstractions": "8.0.2"
+        },
+        "runtime": {
+          "lib/net8.0/Microsoft.Extensions.Logging.Abstractions.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.1325.6609"
           }
         }
       },
@@ -196,6 +224,18 @@
           "lib/netstandard1.1/SharpDX.XInput.dll": {
             "assemblyVersion": "4.2.0.0",
             "fileVersion": "4.2.0.0"
+          }
+        }
+      },
+      "SSH.NET/2025.0.0": {
+        "dependencies": {
+          "BouncyCastle.Cryptography": "2.5.1",
+          "Microsoft.Extensions.Logging.Abstractions": "8.0.3"
+        },
+        "runtime": {
+          "lib/net8.0/Renci.SshNet.dll": {
+            "assemblyVersion": "2025.0.0.1",
+            "fileVersion": "2025.0.0.1"
           }
         }
       },
@@ -839,6 +879,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "BouncyCastle.Cryptography/2.5.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zy8TMeTP+1FH2NrLaNZtdRbBdq7u5MI+NFZQOBSM69u5RFkciinwzV2eveY6Kjf5MzgsYvvl6kTStsj3JrXqkg==",
+      "path": "bouncycastle.cryptography/2.5.1",
+      "hashPath": "bouncycastle.cryptography.2.5.1.nupkg.sha512"
+    },
     "LibVLCSharp/3.9.0": {
       "type": "package",
       "serviceable": true,
@@ -852,6 +899,20 @@
       "sha512": "sha512-FYtdzmuQ2vDit9L+VomO8+oLLoQ/ISLX3Ixl/G+CU1YFJh3vBsgd++XztxkGQvk3p8UvRKR6zzi4LNomIE+RAQ==",
       "path": "libvlcsharp.winforms/3.9.0",
       "hashPath": "libvlcsharp.winforms.3.9.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.DependencyInjection.Abstractions/8.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-3iE7UF7MQkCv1cxzCahz+Y/guQbTqieyxyaWKhrRO91itI9cOKO76OHeQDahqG4MmW5umr3CcCvGmK92lWNlbg==",
+      "path": "microsoft.extensions.dependencyinjection.abstractions/8.0.2",
+      "hashPath": "microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Logging.Abstractions/8.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-dL0QGToTxggRLMYY4ZYX5AMwBb+byQBd/5dMiZE07Nv73o6I5Are3C7eQTh7K2+A4ct0PVISSr7TZANbiNb2yQ==",
+      "path": "microsoft.extensions.logging.abstractions/8.0.3",
+      "hashPath": "microsoft.extensions.logging.abstractions.8.0.3.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",
@@ -1020,6 +1081,13 @@
       "sha512": "sha512-mH3soea+aVUaTuFrkwx+zohklDvCczcgtuTiZJbOCyS5GZ/F9se4BsRJ86xTA9baf0drXYbZQj152PN7lnjiwg==",
       "path": "sharpdx.xinput/4.2.0",
       "hashPath": "sharpdx.xinput.4.2.0.nupkg.sha512"
+    },
+    "SSH.NET/2025.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-AKYbB+q2zFkNQbBFx5gXdv+Wje0baBtADQ35WnMKi4bg1ka74wTQtWoPd+fOWcydohdfsD0nfT8ErMOAPxtSfA==",
+      "path": "ssh.net/2025.0.0",
+      "hashPath": "ssh.net.2025.0.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

@@ -42,6 +42,8 @@
             label7 = new Label();
             button1 = new Button();
             label13 = new Label();
+            textBox1 = new TextBox();
+            label14 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -180,11 +182,31 @@
             label13.Text = "Proxy:";
             label13.Click += label13_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(507, 372);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(395, 31);
+            textBox1.TabIndex = 18;
+            textBox1.TextChanged += textBox1_TextChanged;
+            textBox1.Enter += textBox1_Enter;
+            // 
+            // label14
+            // 
+            label14.Location = new Point(507, 43);
+            label14.Name = "label14";
+            label14.Size = new Size(395, 326);
+            label14.TabIndex = 19;
+            label14.Text = "label14";
+            label14.Click += label14_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2421, 1440);
+            Controls.Add(label14);
+            Controls.Add(textBox1);
             Controls.Add(label13);
             Controls.Add(button1);
             Controls.Add(label7);
@@ -223,5 +245,7 @@
         private Label label7;
         private Button button1;
         private Label label13;
+        private TextBox textBox1;
+        private Label label14;
     }
 }

@@ -16,21 +16,22 @@ using System.Security.Permissions;
 using System.Windows.Forms;
 using System.Net.NetworkInformation;
 using System.Text;
+using Renci.SshNet;
 namespace Ground_base_software
 {
     public partial class Form1 : Form
     {
 
 
-
+        private static SshClient SSHclient;
         private static string TailscaleIP = "uav.tail5bbbe4.ts.net";
         private static IPEndPoint tailscaleEndPoint;
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
         private static int NegotiationPort = 9901;
-      
+
         private static UdpClient NegotiationClient = new UdpClient();
-        
+
         private static UdpClient _client = new UdpClient(PortTXT);
 
         private static UdpClient _NATpuncherTXT = new UdpClient();
@@ -57,8 +58,8 @@ namespace Ground_base_software
         public Form1()
         {
             InitializeComponent();
-            
-            
+
+
         }
 
         private async void Form1_Load(object sender, EventArgs e)
@@ -76,9 +77,11 @@ namespace Ground_base_software
             Label6.Text = "Loading...";
             Label7.Text = "Loading...";
             IPlabel.Text = "Loading...";
-            
-                ProxyLabel.Text = "Proxy: OFF";
-                
+
+            ProxyLabel.Text = "Proxy: OFF";
+
+            SSHclient = UDP_Communication.SSHOpenConnection();
+            UDP_Communication.StartScriptOnUAV(SSHclient);
 
 
             Task.Run(() => StartPlayback(PortVID.ToString()));
@@ -111,7 +114,7 @@ namespace Ground_base_software
             while (SendData)
             {
                 await UDP_Communication.SendUDP(_client, controllerClass.GetOutput(controler));
-               // MessageBox.Show(controllerClass.GetOutput(controler));
+                // MessageBox.Show(controllerClass.GetOutput(controler));
                 Thread.Sleep(10);
             }
         }
@@ -391,6 +394,21 @@ namespace Ground_base_software
         private void label13_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void label14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+     
         }
     }
 }

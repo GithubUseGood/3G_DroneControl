@@ -68,6 +68,10 @@
               "target": "Package",
               "version": "[3.0.4, )"
             },
+            "SSH.NET": {
+              "target": "Package",
+              "version": "[2025.0.0, )"
+            },
             "SharpDX.XInput": {
               "target": "Package",
               "version": "[4.2.0, )"

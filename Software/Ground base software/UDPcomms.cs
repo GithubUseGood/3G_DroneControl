@@ -1,4 +1,6 @@
 using Ground_base_software;
+using Renci.SshNet;
+using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -147,6 +149,125 @@ namespace ZOHD_airplane_software
             }
 
             return ports;
+        }
+
+        public static SshClient SSHOpenConnection ()
+        {
+            string hostname = GetIPofUAV();
+            string username = "User1";
+            string password = "1";
+
+            var client = new SshClient(hostname, username, password);
+
+            return client;
+
+        }
+
+
+
+        public static void StartScriptOnUAV(SshClient client) 
+        {
+            try
+            {
+                client.Connect();
+            }
+            catch(Exception e) 
+            {
+                MessageBox.Show($"Failed to connect to UAV. Exceotion {e.Message} either quit, or start the script manually via SSH");
+            }
+            
+            client.RunCommand("./TESTcode/ZOHD");
+            client.Disconnect();
+        }
+
+        private static string GetIPofUAV()
+        {
+            string hostname = null;
+            while (hostname == null) 
+            {
+                hostname = GetFirstOnlineMachineIp();
+                if (hostname == null) 
+                {
+                    MessageBox.Show("No online machines found in tailscale network.");
+                }
+            }
+            return hostname;
+        }
+
+        public static string GetFirstOnlineMachineIp()
+        {
+            try
+            {
+                // Run the tailscale status command
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "tailscale",
+                        Arguments = "status",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                // Start the process and capture the output
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                // Print raw output for debugging
+                Console.WriteLine("Tailscale Status Output:");
+                Console.WriteLine(output);
+
+                // Parse the output and find the first online machine's IP
+                var lines = output.Split('\n');
+
+                foreach (var line in lines)
+                {
+                    if (!line.Contains("offline") && !line.Contains(GetLocalTailscaleIp()))
+                    {
+                        var parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length > 0)
+                        {
+                            string ip = parts[0];
+                            Console.WriteLine($"Detected IP: {ip}");
+                            return ip;
+                        }
+                    }
+                }
+
+                Console.WriteLine("No online machine detected");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
+
+
+        public static string GetLocalTailscaleIp()
+        {
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = "tailscale",
+                    Arguments = "ip --4",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd().Trim();
+            process.WaitForExit();
+
+            // The output may contain multiple IPs, so return the first one
+            return output.Split('\n')[0].Trim();
         }
 
 
