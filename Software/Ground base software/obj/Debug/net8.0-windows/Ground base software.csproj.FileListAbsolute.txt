@@ -977,3 +977,4 @@ D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
 D:\ZOHD software\ZOHD-UDP\Software\Ground base software\bin\Debug\net8.0-windows\Renci.SshNet.dll
+D:\ZOHD software\ZOHD-UDP\Software\Ground base software\obj\Debug\net8.0-windows\Ground_base_software.Form2.resources

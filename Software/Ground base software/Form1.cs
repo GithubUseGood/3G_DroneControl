@@ -48,7 +48,7 @@ namespace Ground_base_software
         private static Label Label6;
         private static Label Label7;
         private static Label IPlabel;
-        public static Label ProxyLabel { get; set; }
+
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
 
@@ -64,7 +64,7 @@ namespace Ground_base_software
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-            ProxyLabel = this.label13;
+
             IPlabel = this.label7;
             label = this.label1;
             Label2 = this.label4;
@@ -78,10 +78,23 @@ namespace Ground_base_software
             Label7.Text = "Loading...";
             IPlabel.Text = "Loading...";
 
-            ProxyLabel.Text = "Proxy: OFF";
 
-            SSHclient = UDP_Communication.SSHOpenConnection();
-            UDP_Communication.StartScriptOnUAV(SSHclient);
+            UDP_Communication.TailScale.Up();
+
+            using (var connecting = new Form2()) // temp form to tell user its connecting
+            {
+                connecting.Show();
+                connecting.Refresh();
+
+                SSHclient = UDP_Communication.SSHOpenConnection();
+
+
+                UDP_Communication.StartScriptOnUAV(SSHclient);
+
+
+                connecting.Close();
+            }
+
 
 
             Task.Run(() => StartPlayback(PortVID.ToString()));
@@ -130,7 +143,9 @@ namespace Ground_base_software
         private static async Task StartPlayback(string streamUri)
         {
             string command = "ffplay";
-            string arguments = @"-flags low_delay -an -probesize 3M -analyzeduration 1M -i udp://0.0.0.0:" + PortVID;
+
+            string arguments = $"-fflags nobuffer -flags low_delay -framedrop -strict experimental -an -probesize 3M -analyzeduration 1M -i udp://0.0.0.0:{PortVID}";
+
 
             // Create a new process
             Process process = new Process();
@@ -408,7 +423,22 @@ namespace Ground_base_software
 
         private void textBox1_Enter(object sender, EventArgs e)
         {
-     
+
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UDP_Communication.TailScale.Down();
+        }
+
+        private void OpenSSH_Click(object sender, EventArgs e)
+        {
+            UDP_Communication.OpenSSHinCMD();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            UDP_Communication.OpenSSHinCMD();
         }
     }
 }

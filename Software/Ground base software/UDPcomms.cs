@@ -1,5 +1,6 @@
 using Ground_base_software;
 using Renci.SshNet;
+using Renci.SshNet.Common;
 using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -151,6 +152,31 @@ namespace ZOHD_airplane_software
             return ports;
         }
 
+        public static void OpenSSHinCMD() 
+        {
+            try
+            {
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "ssh",
+                        Arguments = $"User1@{GetIPofUAV()}",
+                        RedirectStandardOutput = false,
+                        UseShellExecute = false,
+                        CreateNoWindow = false
+                    }
+                };
+
+                // Start the process and capture the output
+                process.Start();
+            }
+            catch 
+            {
+                MessageBox.Show("SSH failed. Likely not installed on your machine. Or make sure it is in PATH");
+            }
+        }
+
         public static SshClient SSHOpenConnection ()
         {
             string hostname = GetIPofUAV();
@@ -164,14 +190,14 @@ namespace ZOHD_airplane_software
         }
 
 
-
         public static void StartScriptOnUAV(SshClient client) 
         {
             try
             {
                 client.Connect();
             }
-            catch(Exception e) 
+            catch (Renci.SshNet.Common.SshConnectionException) { StartScriptOnUAV(client); } // retry connection if timeout
+            catch (Exception e)
             {
                 MessageBox.Show($"Failed to connect to UAV. Exceotion {e.Message} either quit, or start the script manually via SSH");
             }
@@ -270,7 +296,49 @@ namespace ZOHD_airplane_software
             return output.Split('\n')[0].Trim();
         }
 
+        public class TailScale
+        {
+            public static void Up()
+            {
+                RunCommand("tailscale", "up");
+            }
 
+            public static void Down()
+            {
+                RunCommand("tailscale", "down");
+            }
+
+            private static void RunCommand(string command, string arguments)
+            {
+                try
+                {
+                    using var process = new Process();
+                    process.StartInfo.FileName = command;
+                    process.StartInfo.Arguments = arguments;
+                    process.StartInfo.RedirectStandardOutput = true;
+                    process.StartInfo.RedirectStandardError = true;
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+
+                    process.Start();
+
+                    string output = process.StandardOutput.ReadToEnd();
+                    string error = process.StandardError.ReadToEnd();
+
+                    process.WaitForExit();
+
+                    if (!string.IsNullOrWhiteSpace(output))
+                        Console.WriteLine("Output: " + output);
+
+                    if (!string.IsNullOrWhiteSpace(error))
+                        Console.WriteLine("Error: " + error);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Exception running command: " + ex.Message);
+                }
+            }
+        }
 
     }
 }

@@ -41,9 +41,7 @@
             label12 = new Label();
             label7 = new Label();
             button1 = new Button();
-            label13 = new Label();
-            textBox1 = new TextBox();
-            label14 = new Label();
+            button2 = new Button();
             SuspendLayout();
             // 
             // label1
@@ -172,42 +170,22 @@
             button1.UseVisualStyleBackColor = true;
             button1.Click += button1_Click;
             // 
-            // label13
+            // button2
             // 
-            label13.AutoSize = true;
-            label13.Location = new Point(372, 43);
-            label13.Name = "label13";
-            label13.Size = new Size(60, 25);
-            label13.TabIndex = 17;
-            label13.Text = "Proxy:";
-            label13.Click += label13_Click;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(507, 372);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(395, 31);
-            textBox1.TabIndex = 18;
-            textBox1.TextChanged += textBox1_TextChanged;
-            textBox1.Enter += textBox1_Enter;
-            // 
-            // label14
-            // 
-            label14.Location = new Point(507, 43);
-            label14.Name = "label14";
-            label14.Size = new Size(395, 326);
-            label14.TabIndex = 19;
-            label14.Text = "label14";
-            label14.Click += label14_Click;
+            button2.Location = new Point(73, 324);
+            button2.Name = "button2";
+            button2.Size = new Size(187, 34);
+            button2.TabIndex = 17;
+            button2.Text = "Open SSH";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2421, 1440);
-            Controls.Add(label14);
-            Controls.Add(textBox1);
-            Controls.Add(label13);
+            Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label7);
             Controls.Add(label12);
@@ -223,6 +201,7 @@
             Controls.Add(label1);
             Name = "Form1";
             Text = "Form1";
+            FormClosing += Form1_FormClosing;
             Load += Form1_Load;
             Shown += Form1_Shown;
             ResumeLayout(false);
@@ -244,8 +223,6 @@
         private Label label12;
         private Label label7;
         private Button button1;
-        private Label label13;
-        private TextBox textBox1;
-        private Label label14;
+        private Button button2;
     }
 }
