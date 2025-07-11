@@ -3,6 +3,9 @@
 ## 🎯 Goal
 The objective of this project is to create affordable, easy-to-build RC airplanes/drones ect. Low latency 3G.
 
+## 📖 More detailed guide
+For a more complete walk-through, see the [setup and usage guide](https://1drv.ms/w/c/055b4b7dfb643bad/EVMWZN52gYFHtpbJcTR9bYABvFG4ZbPFRwBCD81aE7sVlQ?e=eXiUvb)
+
 ## 🛠️ Parts List
 - **Raspberry Pi Zero 2 W**  
   The main controller of the airplane, running light server distribution CLI for processing and control tasks. [Raspberrypi disk image download link](https://drive.google.com/file/d/1CwTS7aZE1eEZ_t1bT6Bjh2W8P5gcqS0g/view?usp=sharing). But it should work in any .net linux enviorment.
