@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ZOHD")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+28c3a93a8642946f31aa41b5b9d317772a135fd7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf1ce2b1412d5afb77623ab25499d4b52d4ccde5")]
 [assembly: System.Reflection.AssemblyProductAttribute("ZOHD")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ZOHD")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

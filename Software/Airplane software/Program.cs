@@ -11,9 +11,9 @@ namespace ZOHD_airplane_software
     {
         private static int PortTXT = 9998;
         private static int PortVID = 9990;
-
+        private static IPEndPoint TailscaleEndPoint;
         private static IPAddress TailScaleIP;
-        private static UdpClient _client = new UdpClient(9999);
+        private static UdpClient _client = new UdpClient(PortTXT);
         private static UdpClient _clientVideo = new UdpClient(PortVID);
         private static Pca9685 ServoControllerPca;
         private static bool ReadData = true;
@@ -26,26 +26,10 @@ namespace ZOHD_airplane_software
 
         static async Task Main(string[] args)
         {
-            try
-            {
-                TailScaleIP = Dns.GetHostAddresses(UDP_Communication.GetFirstOnlineMachineHostname())[0]; // tailscale static IP you need to setup manually.
-            }
-            catch 
-            {
-                Console.WriteLine($"couldnt resolve {UDP_Communication.GetFirstOnlineMachineHostname()}");
-            }
-
+          
             Console.WriteLine($"Welcome {DateTime.Now}");
-            try
-            {
-                Console.WriteLine($"Controller IP is {TailScaleIP.ToString}");
-            }
-            catch 
-            {
-                Console.WriteLine($"Failed to resolve hostname to ip. Change hostname?");
-                TailScaleIP = Dns.GetHostAddresses(Console.ReadLine())[0];
-            }
-           
+            TailscaleEndPoint = await UDP_Communication.CaptureIpFromMessage(_client);
+            TailScaleIP = TailscaleEndPoint.Address;
             ServoControllerPca = Controls.ConnectServoController();
             Console.WriteLine("HOST:" + TailScaleIP.ToString() + " PORTS: VID: " + PortVID);
             OutputStatus.Start();

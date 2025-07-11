@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EN92Md3tzeM=",
+  "dgSpecHash": "vjVZI+bxJRM=",
   "success": true,
-  "projectFilePath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\ZOHD airplane software\\ZOHD airplane software.csproj",
+  "projectFilePath": "D:\\ZOHD software\\ZOHD-UDP\\Software\\Airplane software\\ZOHD airplane software.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\iot.device.bindings\\3.2.0\\iot.device.bindings.3.2.0.nupkg.sha512",
     "C:\\Users\\petar_0r3wy5h\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.1\\microsoft.extensions.logging.abstractions.7.0.1.nupkg.sha512",

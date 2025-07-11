@@ -81,20 +81,19 @@ namespace Ground_base_software
 
             UDP_Communication.TailScale.Up();
 
-            using (var connecting = new Form2()) // temp form to tell user its connecting
-            {
-                connecting.Show();
-                connecting.Refresh();
+            
+          //  using (var connecting = new Form2()) // temp form to tell user its connecting
+          //  {
+            //    connecting.Show();
+            //    connecting.Refresh();
 
                 SSHclient = UDP_Communication.SSHOpenConnection();
-
-
                 UDP_Communication.StartScriptOnUAV(SSHclient);
 
 
-                connecting.Close();
-            }
-
+          //      connecting.Close();
+          //  }
+            
 
 
             Task.Run(() => StartPlayback(PortVID.ToString()));
@@ -106,9 +105,8 @@ namespace Ground_base_software
         static async Task StartUDPcomms()
         {
             Controller controler = controllerClass.ConnectControler();
+            _client.Connect(new IPEndPoint(IPAddress.Parse(UDP_Communication.GetFirstOnlineMachineIp()), PortTXT));
 
-            tailscaleEndPoint = await UDP_Communication.CaptureIpFromMessage(_client);
-            _client.Connect(tailscaleEndPoint);
 
             Task.Run(() => SendUDP(_client, controler));
             Task.Run(() => RecieveUDP(_client));

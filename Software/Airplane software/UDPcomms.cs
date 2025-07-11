@@ -9,6 +9,143 @@ namespace ZOHD_airplane_software
     
     class UDP_Communication() 
     {
+        public static void KillOtherProcessesUsingUdpPort(int port)
+        {
+            try
+            {
+                int currentPid = Process.GetCurrentProcess().Id;
+                Console.WriteLine($"Current PID: {currentPid}");
+
+                var lsof = new ProcessStartInfo
+                {
+                    FileName = "lsof",
+                    Arguments = $"-t -i udp:{port}",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using (var process = Process.Start(lsof))
+                {
+                    string output = process.StandardOutput.ReadToEnd();
+                    string err = process.StandardError.ReadToEnd();
+                    process.WaitForExit();
+
+                    if (!string.IsNullOrEmpty(err))
+                    {
+                        Console.WriteLine($"lsof error: {err}");
+                    }
+
+                    Console.WriteLine($"lsof output:\n{output}");
+
+                    if (!string.IsNullOrWhiteSpace(output))
+                    {
+                        var pids = output
+                            .Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(pidStr => int.TryParse(pidStr, out var pid) ? pid : -1)
+                            .Where(pid => pid > 0 && pid != currentPid)
+                            .Distinct()
+                            .ToList();
+
+                        if (!pids.Any())
+                        {
+                            Console.WriteLine($"No other processes found using UDP port {port}");
+                            return;
+                        }
+
+                        foreach (var pid in pids)
+                        {
+                            Console.WriteLine($"Attempting graceful kill (SIGTERM) of process {pid} using UDP port {port}");
+                            var killTerm = Process.Start("kill", $"-15 {pid}");
+                            killTerm?.WaitForExit();
+
+                            // Wait a bit to let the process exit gracefully
+                            System.Threading.Thread.Sleep(500);
+
+                            // Check if process still exists, then force kill
+                            try
+                            {
+                                var proc = Process.GetProcessById(pid);
+                                if (!proc.HasExited)
+                                {
+                                    Console.WriteLine($"Process {pid} still running, force killing (SIGKILL)");
+                                    var killKill = Process.Start("kill", $"-9 {pid}");
+                                    killKill?.WaitForExit();
+                                }
+                            }
+                            catch (ArgumentException)
+                            {
+                                // Process does not exist, already exited
+                                Console.WriteLine($"Process {pid} terminated gracefully.");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine($"No processes found using UDP port {port}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error trying to kill process using port {port}: {ex.Message}");
+            }
+        }
+
+
+        public static string GetFirstOnlineMachineIp()
+        {
+            try
+            {
+                // Run the tailscale status command
+                var process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = "tailscale",
+                        Arguments = "status",
+                        RedirectStandardOutput = true,
+                        UseShellExecute = false,
+                        CreateNoWindow = true
+                    }
+                };
+
+                // Start the process and capture the output
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                process.WaitForExit();
+
+                // Print raw output for debugging
+                Console.WriteLine("Tailscale Status Output:");
+                Console.WriteLine(output);
+
+                // Parse the output and find the first online machine's IP
+                var lines = output.Split('\n');
+
+                foreach (var line in lines)
+                {
+                    if (!line.Contains("offline") && !line.Contains(GetLocalTailscaleIp()))
+                    {
+                        var parts = line.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length > 0)
+                        {
+                            string ip = parts[0];
+                            Console.WriteLine($"Detected IP: {ip}");
+                            return ip;
+                        }
+                    }
+                }
+
+                Console.WriteLine("No online machine detected");
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                return null;
+            }
+        }
 
         public static string GetFirstOnlineMachineHostname()
         {

@@ -14,6 +14,7 @@ namespace ZOHD_airplane_software
     class UDP_Communication() 
     {
         private static int CurrentMessages = 0;
+       
         public static int MessagesPerSecond { get; set; } = 0;
 
         /// <summary>
@@ -184,9 +185,16 @@ namespace ZOHD_airplane_software
             string password = "1";
 
             var client = new SshClient(hostname, username, password);
-
+            KillOldRunTime(client);
             return client;
 
+        }
+
+        private static void KillOldRunTime(SshClient client) 
+        {
+            client.Connect();
+            client.RunCommand("killall ZOHD");
+            client.Disconnect();
         }
 
 
@@ -196,13 +204,17 @@ namespace ZOHD_airplane_software
             {
                 client.Connect();
             }
-            catch (Renci.SshNet.Common.SshConnectionException) { StartScriptOnUAV(client); } // retry connection if timeout
+
             catch (Exception e)
             {
                 MessageBox.Show($"Failed to connect to UAV. Exceotion {e.Message} either quit, or start the script manually via SSH");
             }
-            
-            client.RunCommand("./TESTcode/ZOHD");
+
+
+            using (var cmd = client.CreateCommand("nohup ./TESTcode/ZOHD > zohd.out 2>&1 &"))
+            {
+                cmd.Execute();
+            }
             client.Disconnect();
         }
 
@@ -214,7 +226,9 @@ namespace ZOHD_airplane_software
                 hostname = GetFirstOnlineMachineIp();
                 if (hostname == null) 
                 {
-                    MessageBox.Show("No online machines found in tailscale network.");
+                    var res = MessageBox.Show("No online machines found.", "Error", MessageBoxButtons.RetryCancel);
+                    if (res == DialogResult.Cancel) Environment.Exit(0);
+
                 }
             }
             return hostname;
