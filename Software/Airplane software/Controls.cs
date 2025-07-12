@@ -4,15 +4,15 @@ using System.Runtime.CompilerServices;
 
 namespace UDPtest
 {
-    using System;
     using Iot.Device.Pwm; // For Pca9685
-
-    using System.Threading.Tasks;
-    using Unosquare.RaspberryIO.Abstractions;
-    using Unosquare.RaspberryIO;
-    using System.Runtime.InteropServices;
+    using System;
     using System.Device.I2c;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
     using System.Threading;
+    using System.Threading.Tasks;
+    using Unosquare.RaspberryIO;
+    using Unosquare.RaspberryIO.Abstractions;
     using ZOHD_airplane_software;
 
     /// <summary>
@@ -47,11 +47,12 @@ namespace UDPtest
             catch (Exception ex)
             {
                 Console.WriteLine($"Error connecting to PCA9685: {ex.Message}");
-                return null; // Return null if connection fails
+               
+                Console.WriteLine("Resetting I2C bus...");
+                ResetI2cBus();
+                return null; 
             }
         }
-
-        private static bool isTaskRunning = false;
 
         /// <summary>
         /// Parses data incoming to the raspberry and writes it to servo.
@@ -71,7 +72,7 @@ namespace UDPtest
                 var Instructions = UnpackMessageTools.UnpackMessages(message);
                 foreach (var instruction in Instructions) 
                 {
-                    Console.WriteLine($"adress {instruction.adress} angle {instruction.angle}");
+                   
                     SetServoAngle(pca, instruction.adress, instruction.angle);
                 }
             }
@@ -80,6 +81,53 @@ namespace UDPtest
                 semaphore.Release();
             }
         }
+
+        public static void ResetI2cBus()
+        {
+            Console.WriteLine("Resetting I2C bus...");
+
+            try
+            {
+                RunShellCommand("sudo", "rmmod i2c_bcm2835");
+                RunShellCommand("sudo", "modprobe i2c_bcm2835");
+                Console.WriteLine("I2C bus reset complete.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to reset I2C bus: {ex.Message}");
+            }
+        }
+
+        private static void RunShellCommand(string command, string args)
+        {
+            var process = new Process
+            {
+                StartInfo = new ProcessStartInfo
+                {
+                    FileName = command,
+                    Arguments = args,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                }
+            };
+
+            process.Start();
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+
+            if (process.ExitCode != 0)
+            {
+                throw new InvalidOperationException($"Command '{command} {args}' failed with error: {error}");
+            }
+
+            if (!string.IsNullOrWhiteSpace(output))
+                Console.WriteLine(output);
+        }
+
+
 
         private static void SetServoAngle(Pca9685 pca9685, int channel, int angle)
         {

@@ -38,6 +38,7 @@
     <PackageReference Include="LibVLCSharp.WinForms" Version="3.9.0" />
     <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.3065.39" />
     <PackageReference Include="Mono.Nat" Version="3.0.4" />
+    <PackageReference Include="SharpDX" Version="4.2.0" />
     <PackageReference Include="SharpDX.XInput" Version="4.2.0" />
     <PackageReference Include="SSH.NET" Version="2025.0.0" />
     <PackageReference Include="VideoLAN.LibVLC.Windows" Version="3.0.20" />

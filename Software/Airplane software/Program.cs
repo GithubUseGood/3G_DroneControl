@@ -18,8 +18,6 @@ namespace ZOHD_airplane_software
         private static Pca9685 ServoControllerPca;
         private static bool ReadData = true;
         private static bool SendData = true;
-        private static int NegotiationPort = 9900;
-        private static UdpClient NegotiationClient = new UdpClient();
         private static String RecievedMessage;
 
 
@@ -31,6 +29,8 @@ namespace ZOHD_airplane_software
             TailscaleEndPoint = await UDP_Communication.CaptureIpFromMessage(_client);
             TailScaleIP = TailscaleEndPoint.Address;
             ServoControllerPca = Controls.ConnectServoController();
+            // retry connecting to PCA9685 once
+            if (ServoControllerPca == null) { ServoControllerPca = Controls.ConnectServoController(); }
             Console.WriteLine("HOST:" + TailScaleIP.ToString() + " PORTS: VID: " + PortVID);
             OutputStatus.Start();
             StartUDPcomms();

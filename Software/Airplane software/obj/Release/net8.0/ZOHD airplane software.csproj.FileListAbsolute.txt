@@ -96,3 +96,12 @@ D:\ZOHD software\ZOHD-UDP\Software\Airplane software\obj\Release\net8.0\refint\Z
 D:\ZOHD software\ZOHD-UDP\Software\Airplane software\obj\Release\net8.0\ZOHD.pdb
 D:\ZOHD software\ZOHD-UDP\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.genruntimeconfig.cache
 D:\ZOHD software\ZOHD-UDP\Software\Airplane software\obj\Release\net8.0\ref\ZOHD.dll
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.csproj.AssemblyReference.cache
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.AssemblyInfoInputs.cache
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.AssemblyInfo.cs
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.csproj.CoreCompileInputs.cache
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD airplane software.sourcelink.json
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD.dll
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\refint\ZOHD.dll
+C:\Users\Petar\source\repos\Mobile_Data_Drone_Control_FPV\Software\Airplane software\obj\Release\net8.0\ZOHD.pdb

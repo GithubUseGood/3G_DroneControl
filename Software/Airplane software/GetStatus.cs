@@ -6,7 +6,6 @@ namespace ZOHD_airplane_software
     class OutputStatus() 
     {
         private static bool IsTesting;
-        private static string CurrentOutput;
         public static bool StopOutput { get; set; } = false;
 
         private static String SignalStrength = "0";
