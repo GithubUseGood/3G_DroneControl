@@ -5,24 +5,25 @@ using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ZOHD_airplane_software
-{ 
-    
-    class UDP_Communication() 
+{
+
+    class UDP_Communication()
     {
         private static int CurrentMessages = 0;
-       
+
         public static int MessagesPerSecond { get; set; } = 0;
 
         /// <summary>
         /// Returns IPEndPoint from UDP message
         /// </summary>
-        public static async Task<IPEndPoint> CaptureIpFromMessage(UdpClient _client) 
+        public static async Task<IPEndPoint> CaptureIpFromMessage(UdpClient _client)
         {
-           
+
             UdpReceiveResult result;
             result = await _client.ReceiveAsync();
             return result.RemoteEndPoint;
@@ -31,28 +32,58 @@ namespace ZOHD_airplane_software
         /// <summary>
         /// Reads message from UDP.
         /// </summary>
-        public static async Task<string> ReadUDP(UdpClient _client) 
+        public static async Task<string> ReadUDP(UdpClient _client)
         {
-           
+
             UdpReceiveResult result;
             result = await _client.ReceiveAsync();
             CurrentMessages++;
             return Encoding.ASCII.GetString(result.Buffer);
         }
 
+        public static void FlushUDP(UdpClient client)
+        {
+
+            var remoteEP = new IPEndPoint(IPAddress.Any, 0);
+
+            // Set ReceiveTimeout to avoid blocking indefinitely
+            client.Client.ReceiveTimeout = 10; // milliseconds
+
+            while (client.Available > 0)
+            {
+                try
+                {
+                    byte[] data = client.Receive(ref remoteEP);
+                    // Discard data
+                }
+                catch (SocketException ex)
+                {
+                    if (ex.SocketErrorCode == SocketError.TimedOut ||
+                        ex.SocketErrorCode == SocketError.WouldBlock)
+                    {
+                        break; // No more data to read
+                    }
+                    else
+                    {
+                        throw; // Unexpected socket error
+                    }
+                }
+            }
+
+        }
         /// <summary>
         /// Sends message from UDP.
         /// Make sure UdpClient is connected
         /// </summary>
-        public static async Task SendUDP(UdpClient _client, string message) 
+        public static async Task SendUDP(UdpClient _client, string message)
         {
-           await _client.SendAsync(Encoding.ASCII.GetBytes(message));
+            await _client.SendAsync(Encoding.ASCII.GetBytes(message));
         }
 
-        public static async Task TrackMessagesPerSecond() 
+        public static async Task TrackMessagesPerSecond()
         {
             CurrentMessages = 0;
-            while (true) 
+            while (true)
             {
                 MessagesPerSecond = CurrentMessages;
                 CurrentMessages = 0;
@@ -60,9 +91,9 @@ namespace ZOHD_airplane_software
             }
         }
 
-        public static PingReply CheckIfReachable(string ipv4) 
+        public static PingReply CheckIfReachable(string ipv4)
         {
-            using (Ping ping = new Ping()) 
+            using (Ping ping = new Ping())
             {
                 PingReply reply = ping.Send(ipv4, 1000); // 1000ms timeout
                 return reply;
@@ -70,9 +101,9 @@ namespace ZOHD_airplane_software
         }
 
 
-      
 
-        public static Color AsignColor(int value, int[] Borders) 
+
+        public static Color AsignColor(int value, int[] Borders)
         {
             try
             {
@@ -102,10 +133,10 @@ namespace ZOHD_airplane_software
                 Console.WriteLine("Exception in color assignment: " + ex.Message);
                 return Color.Purple;
             }
-        
+
         }
 
-        public static int ParseAtAllCosts(string ToParse) 
+        public static int ParseAtAllCosts(string ToParse)
         {
             try
             {
@@ -120,24 +151,24 @@ namespace ZOHD_airplane_software
                 if (ToParse == String.Empty) return -1;
                 return int.Parse(ParsedData);
             }
-            catch 
+            catch
             {
                 return -1;
             }
-         
+
         }
 
         public static async Task KeepNATopen(UdpClient _client1, UdpClient _client2) // heartbeat
         {
             Byte[] Message = Encoding.ASCII.GetBytes("Keep me alive cuh");
-            while (true) 
+            while (true)
             {
-               await _client1.SendAsync(Message);
-               await _client2.SendAsync(Message);
+                await _client1.SendAsync(Message);
+                await _client2.SendAsync(Message);
 
                 Thread.Sleep(5000);
             }
-           
+
         }
 
         public static List<int> ExtractPorts(string message)
@@ -153,7 +184,7 @@ namespace ZOHD_airplane_software
             return ports;
         }
 
-        public static void OpenSSHinCMD() 
+        public static void OpenSSHinCMD()
         {
             try
             {
@@ -172,13 +203,13 @@ namespace ZOHD_airplane_software
                 // Start the process and capture the output
                 process.Start();
             }
-            catch 
+            catch
             {
                 MessageBox.Show("SSH failed. Likely not installed on your machine. Or make sure it is in PATH");
             }
         }
 
-        public static SshClient SSHOpenConnection ()
+        public static SshClient SSHOpenConnection()
         {
             string hostname = GetIPofUAV();
             string username = "User1";
@@ -190,7 +221,7 @@ namespace ZOHD_airplane_software
 
         }
 
-        private static void KillOldRunTime(SshClient client) 
+        private static void KillOldRunTime(SshClient client)
         {
             client.Connect();
             client.RunCommand("killall ZOHD");
@@ -198,29 +229,6 @@ namespace ZOHD_airplane_software
         }
 
 
-        public static void OpenSSHWindow(SshClient client)
-        {
-            try
-            {
-                string ip = client.ConnectionInfo.Host;
-                string username = client.ConnectionInfo.Username;
-
-                var psi = new ProcessStartInfo
-                {
-                    FileName = "cmd.exe",
-                    Arguments = $"/k ssh {username}@{ip} -t \"cd ~/TESTcode && ./ZOHD\"",
-                    UseShellExecute = true,
-                    CreateNoWindow = false,
-                    WindowStyle = ProcessWindowStyle.Normal,
-                };
-
-                Process.Start(psi);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Failed to start CMD with SSH: {ex.Message}");
-            }
-        }
 
 
 
@@ -228,10 +236,10 @@ namespace ZOHD_airplane_software
         private static string GetIPofUAV()
         {
             string hostname = null;
-            while (hostname == null) 
+            while (hostname == null)
             {
                 hostname = GetFirstOnlineMachineIp();
-                if (hostname == null) 
+                if (hostname == null)
                 {
                     var res = MessageBox.Show("No online machines found.", "Error", MessageBoxButtons.RetryCancel);
                     if (res == DialogResult.Cancel) Environment.Exit(0);
@@ -294,6 +302,56 @@ namespace ZOHD_airplane_software
             }
         }
 
+        private static readonly ManualResetEventSlim uiResponseEvent = new(false);
+        private static readonly object _lock = new();
+        private static int _lastLatencyMs = -1;
+        private static DateTime _lastMeasureTime = DateTime.MinValue;
+
+        public static int MeasureUiResponseTime(Control uiControl, int timeoutMs = 500)
+        {
+            lock (_lock)
+            {
+                var now = DateTime.UtcNow;
+                if ((now - _lastMeasureTime).TotalSeconds < 1)
+                {
+                    // Return cached result if measured less than 1 second ago
+                    return _lastLatencyMs;
+                }
+
+                _lastMeasureTime = now;
+            }
+
+            uiResponseEvent.Reset();
+            var stopwatch = Stopwatch.StartNew();
+
+            if (!uiControl.InvokeRequired)
+            {
+                // On UI thread: respond immediately
+                lock (_lock)
+                {
+                    _lastLatencyMs = 0;
+                    _lastMeasureTime = DateTime.UtcNow;
+                }
+                return 0;
+            }
+
+            uiControl.BeginInvoke(new Action(() =>
+            {
+                stopwatch.Stop();
+                uiResponseEvent.Set();
+            }));
+
+            bool signaled = uiResponseEvent.Wait(timeoutMs);
+
+            lock (_lock)
+            {
+                _lastLatencyMs = signaled ? (int)stopwatch.ElapsedMilliseconds : -1;
+                _lastMeasureTime = DateTime.UtcNow;
+            }
+
+            return _lastLatencyMs;
+        }
+
 
         public static string GetLocalTailscaleIp()
         {
@@ -315,6 +373,25 @@ namespace ZOHD_airplane_software
 
             // The output may contain multiple IPs, so return the first one
             return output.Split('\n')[0].Trim();
+        }
+
+        public static async Task ResetIfMessagesDropToZero(UdpClient client)
+        {
+            Thread.Sleep(2500); // give time for everything to initalise to avoid reseting if its not needed
+            while (true)
+            {
+                if (UDP_Communication.MessagesPerSecond == 0)
+                {
+                    Form1.ReadData = false;
+                    await Task.Delay(4000);
+                    Form1.ReadData = true;
+
+                    // Fire-and-forget wrapped in Task.Run
+                    _ = Task.Run(() => Form1.RecieveUDP(client));
+                }
+
+                await Task.Delay(5000);
+            }
         }
 
         public class TailScale
@@ -361,5 +438,98 @@ namespace ZOHD_airplane_software
             }
         }
 
+        public class SSHBox
+        {
+            private static ShellStream stream;
+            private static StringBuilder outputLog = new StringBuilder();
+            private static bool isReading = false;
+            private static RichTextBox _sshOutputLabel;
+            private static readonly int MaxLogLength = 100_000;
+
+            public static void StartSSH(SshClient client)
+            {
+                client.Connect();
+
+                if (!client.IsConnected)
+                {
+                    MessageBox.Show($"Failed to connect to UAV");
+                    return;
+                }
+
+                stream = client.CreateShellStream("xterm", 80, 24, 800, 600, 1024);
+                stream.WriteLine("cd ~/TESTcode && ./ZOHD");
+
+                if (!isReading)
+                {
+                    isReading = true;
+                    Task.Run(() => ReadOutputLoop());
+                }
+
+                Thread.Sleep(2500); // give time for UAV to init
+            }
+
+           
+
+            public static void SendCommand(string command)
+            {
+                if (stream != null && stream.CanWrite)
+                    stream.WriteLine(command);
+            }
+
+            public static void SendCtrlC()
+            {
+                if (stream != null && stream.CanWrite)
+                {
+                    stream.Write("\x03"); // Ctrl+C character
+                    stream.Flush();
+                }
+            }
+
+            public static string GetFullOutput()
+            {
+                return outputLog.ToString();
+            }
+
+            public static void SetOutputLabel(RichTextBox richTextBox)
+            {
+                _sshOutputLabel = richTextBox;
+            }
+
+            private static void ReadOutputLoop()
+            {
+                while (true)
+                {
+                    if (stream != null && stream.DataAvailable)
+                    {
+                        string data = stream.Read();
+                        if (!string.IsNullOrEmpty(data))
+                        {
+                            outputLog.Append(data);
+
+                            if (_sshOutputLabel != null && _sshOutputLabel.IsHandleCreated)
+                            {
+                                _sshOutputLabel.Invoke((MethodInvoker)(() =>
+                                {
+                                    _sshOutputLabel.Text = Regex.Replace(outputLog.ToString(), @"\x1B\[[0-9;]*[mK]", "");
+
+                                    // Auto-scroll to the bottom:
+                                    _sshOutputLabel.SelectionStart = _sshOutputLabel.Text.Length;
+                                    _sshOutputLabel.ScrollToCaret();
+
+                                    if (outputLog.Length > MaxLogLength)
+                                    {
+                                        outputLog.Remove(0, outputLog.Length / 4);
+                                    }
+                                }));
+                            }
+                        }
+                    }
+                    Thread.Sleep(30);
+                }
+            }
+
+
+
+        }
     }
 }

@@ -87,19 +87,95 @@ namespace UDPtest
         {
             try
             {
-                var unload = Process.Start("sudo", "modprobe -r i2c-dev");
+                int currentPid = System.Diagnostics.Process.GetCurrentProcess().Id;
+
+                var findProcess = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "sudo",
+                    Arguments = "lsof /dev/i2c-1",
+                    RedirectStandardOutput = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
+
+                string output = findProcess.StandardOutput.ReadToEnd();
+                findProcess.WaitForExit();
+
+                if (!string.IsNullOrWhiteSpace(output))
+                {
+                    Console.WriteLine("Processes using /dev/i2c-1:\n" + output);
+
+                    var lines = output.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (var line in lines.Skip(1)) // skip header
+                    {
+                        var columns = line.Split(new[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
+                        if (columns.Length >= 2 && int.TryParse(columns[1], out int pid))
+                        {
+                            // Skip killing critical system and your own process
+                            if (pid == currentPid || pid <= 100)
+                            {
+                                Console.WriteLine($"Skipping killing critical or own process PID {pid}.");
+                                continue;
+                            }
+
+                            try
+                            {
+                                Console.WriteLine($"Killing process with PID {pid} holding /dev/i2c-1...");
+                                var kill = Process.Start(new ProcessStartInfo
+                                {
+                                    FileName = "sudo",
+                                    Arguments = $"kill -9 {pid}",
+                                    RedirectStandardOutput = true,
+                                    RedirectStandardError = true,
+                                    UseShellExecute = false,
+                                    CreateNoWindow = true
+                                });
+                                kill.WaitForExit();
+                            }
+                            catch (Exception ex)
+                            {
+                                Console.WriteLine($"Failed to kill process {pid}: {ex.Message}");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No processes currently using /dev/i2c-1.");
+                }
+
+                var unload = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "sudo",
+                    Arguments = "modprobe -r i2c-dev",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
                 unload.WaitForExit();
 
-                var load = Process.Start("sudo", "modprobe i2c-dev");
+                var load = Process.Start(new ProcessStartInfo
+                {
+                    FileName = "sudo",
+                    Arguments = "modprobe i2c-dev",
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                });
                 load.WaitForExit();
 
-                Console.WriteLine("I2C bus reset successfully.");
+                Console.WriteLine("I2C bus reset attempted.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to reset I2C bus: {ex.Message}");
+                Console.WriteLine($"Error resetting I2C bus: {ex.Message}");
             }
         }
+
+
 
         private static void SetServoAngle(Pca9685 pca9685, int channel, int angle)
         {
@@ -143,6 +219,7 @@ namespace UDPtest
             finally
             {
                 pca?.Dispose();
+              
                 Console.WriteLine("I²C connection closed.");
                 Environment.Exit(0);
             }

@@ -42,6 +42,11 @@
             label7 = new Label();
             button1 = new Button();
             button2 = new Button();
+            TextBox1 = new TextBox();
+            SSHoutput = new RichTextBox();
+            Interupt = new Button();
+            label13 = new Label();
+            label14 = new Label();
             SuspendLayout();
             // 
             // label1
@@ -162,9 +167,9 @@
             // 
             // button1
             // 
-            button1.Location = new Point(73, 284);
+            button1.Location = new Point(907, 970);
             button1.Name = "button1";
-            button1.Size = new Size(187, 34);
+            button1.Size = new Size(235, 34);
             button1.TabIndex = 16;
             button1.Text = "Restart video reciever";
             button1.UseVisualStyleBackColor = true;
@@ -172,19 +177,73 @@
             // 
             // button2
             // 
-            button2.Location = new Point(73, 324);
+            button2.Location = new Point(666, 970);
             button2.Name = "button2";
-            button2.Size = new Size(187, 34);
+            button2.Size = new Size(235, 34);
             button2.TabIndex = 17;
             button2.Text = "Open SSH";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
+            // 
+            // TextBox1
+            // 
+            TextBox1.Location = new Point(428, 933);
+            TextBox1.Name = "TextBox1";
+            TextBox1.Size = new Size(714, 31);
+            TextBox1.TabIndex = 19;
+            TextBox1.TextChanged += textBox1_TextChanged_1;
+            TextBox1.KeyDown += textBox1_KeyDown;
+            // 
+            // SSHoutput
+            // 
+            SSHoutput.BackColor = SystemColors.ActiveCaptionText;
+            SSHoutput.ForeColor = Color.FromArgb(0, 64, 0);
+            SSHoutput.Location = new Point(428, 43);
+            SSHoutput.Name = "SSHoutput";
+            SSHoutput.ReadOnly = true;
+            SSHoutput.Size = new Size(714, 884);
+            SSHoutput.TabIndex = 20;
+            SSHoutput.Text = "";
+            // 
+            // Interupt
+            // 
+            Interupt.Location = new Point(428, 970);
+            Interupt.Name = "Interupt";
+            Interupt.Size = new Size(235, 34);
+            Interupt.TabIndex = 21;
+            Interupt.Text = "Interrupt (Ctrl+C)";
+            Interupt.UseVisualStyleBackColor = true;
+            Interupt.Click += Interupt_Click;
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(73, 259);
+            label13.Name = "label13";
+            label13.Size = new Size(155, 25);
+            label13.TabIndex = 22;
+            label13.Text = "Local UI response:";
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(220, 259);
+            label14.Name = "label14";
+            label14.Size = new Size(69, 25);
+            label14.TabIndex = 23;
+            label14.Text = "label14";
+            label14.Click += label14_Click_1;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(2421, 1440);
+            Controls.Add(label14);
+            Controls.Add(label13);
+            Controls.Add(Interupt);
+            Controls.Add(SSHoutput);
+            Controls.Add(TextBox1);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(label7);
@@ -224,5 +283,10 @@
         private Label label7;
         private Button button1;
         private Button button2;
+        private TextBox TextBox1;
+        private RichTextBox SSHoutput;
+        private Button Interupt;
+        private Label label13;
+        private Label label14;
     }
 }

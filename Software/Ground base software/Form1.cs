@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using System.Net.NetworkInformation;
 using System.Text;
 using Renci.SshNet;
+using Org.BouncyCastle.Crmf;
 namespace Ground_base_software
 {
     public partial class Form1 : Form
@@ -37,8 +38,8 @@ namespace Ground_base_software
         private static UdpClient _NATpuncherTXT = new UdpClient();
         private static UdpClient _NATpuncherVID = new UdpClient();
 
-        private static bool ReadData = true;
-        private static bool SendData = true;
+        public static bool ReadData = true; // used to reset sending/reading functions if needed
+        public static bool SendData = true;
 
         private static String RecievedMessage;
 
@@ -48,11 +49,12 @@ namespace Ground_base_software
         private static Label Label6;
         private static Label Label7;
         private static Label IPlabel;
-
+        private static Label UILatency;
+        private static Control Control;
         private LibVLC _libVLC;
         private MediaPlayer _mediaPlayer;
 
-
+        private static readonly SemaphoreSlim _udpSemaphore = new(1, 1);
 
 
         public Form1()
@@ -64,35 +66,38 @@ namespace Ground_base_software
 
         private async void Form1_Load(object sender, EventArgs e)
         {
-
+            Control = this;
             IPlabel = this.label7;
             label = this.label1;
             Label2 = this.label4;
             Label5 = this.label5;
             Label6 = this.label8;
             Label7 = this.label9;
+            UILatency = this.label14;
+            UILatency.Text = "Loading...";
             Label5.Text = "Loading...";
             label.Text = "Loading...";
             Label2.Text = "Loading...";
             Label6.Text = "Loading...";
             Label7.Text = "Loading...";
             IPlabel.Text = "Loading...";
-
+           
 
             UDP_Communication.TailScale.Up();
 
-            
+
             using (var connecting = new Form2()) // temp form to tell user its connecting
             {
                 connecting.Show();
-               connecting.Refresh();
+                connecting.Refresh();
                 SSHclient = UDP_Communication.SSHOpenConnection();
-                UDP_Communication.OpenSSHWindow(SSHclient);
+                UDP_Communication.SSHBox.SetOutputLabel(this.SSHoutput); // set which label to use for SSH output
+                UDP_Communication.SSHBox.StartSSH(SSHclient);
 
 
                 connecting.Close();
             }
-            
+
 
 
             Task.Run(() => StartPlayback(PortVID.ToString()));
@@ -108,12 +113,12 @@ namespace Ground_base_software
 
 
             Task.Run(() => SendUDP(_client, controler));
+            //UDP_Communication.FlushUDP(_client);
             Task.Run(() => RecieveUDP(_client));
+            Task.Run(() => UDP_Communication.ResetIfMessagesDropToZero(_client));
             UDP_Communication.TrackMessagesPerSecond();
 
             Thread.Sleep(1000);
-
-
 
         }
 
@@ -128,15 +133,27 @@ namespace Ground_base_software
                 Thread.Sleep(10);
             }
         }
-        static async Task RecieveUDP(UdpClient _client)
+        public static async Task RecieveUDP(UdpClient _client)
         {
-            RecievedMessage = await UDP_Communication.ReadUDP(_client);
-            Task.Run(() => UpdateUI());
-            while (ReadData)
+            if (!await _udpSemaphore.WaitAsync(0))  // Try enter immediately
+                return;  
+
+            try
             {
                 RecievedMessage = await UDP_Communication.ReadUDP(_client);
+                UpdateUI();
+
+                while (ReadData)
+                {
+                    RecievedMessage = await UDP_Communication.ReadUDP(_client);
+                }
+            }
+            finally
+            {
+                _udpSemaphore.Release();
             }
         }
+
         private static async Task StartPlayback(string streamUri)
         {
             string command = "ffplay";
@@ -197,10 +214,20 @@ namespace Ground_base_software
 
 
 
-        private static void UpdateUI()
+        private static async void UpdateUI()
         {
             while (true)
             {
+                await Task.Run(() =>
+                {
+                    int latency = UDP_Communication.MeasureUiResponseTime(Control);
+
+                    Control.Invoke(new Action(() =>
+                    {
+                        UILatency.Text = latency.ToString();
+                    }));
+                });
+                
                 String lastString = RecievedMessage;
                 int separatorIndex = lastString.IndexOf('.');
                 if (separatorIndex != -1)
@@ -336,6 +363,9 @@ namespace Ground_base_software
                 {
                     Environment.Exit(2);
                 }
+
+                await Task.Delay(30); // prevents freezing
+
             }
 
         }
@@ -436,6 +466,40 @@ namespace Ground_base_software
         private void button2_Click(object sender, EventArgs e)
         {
             UDP_Communication.OpenSSHinCMD();
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                // Enter key pressed
+                e.Handled = true;
+                string command = this.TextBox1.Text;
+                this.TextBox1.Text = String.Empty;
+
+                UDP_Communication.SSHBox.SendCommand(command);
+
+            }
+        }
+
+        private void label13_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Interupt_Click(object sender, EventArgs e)
+        {
+            UDP_Communication.SSHBox.SendCtrlC();
+        }
+
+        private void label14_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

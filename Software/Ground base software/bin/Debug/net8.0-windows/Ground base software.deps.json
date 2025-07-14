@@ -13,6 +13,7 @@
           "Microsoft.Web.WebView2": "1.0.3065.39",
           "Mono.Nat": "3.0.4",
           "SSH.NET": "2025.0.0",
+          "SharpDX": "4.2.0",
           "SharpDX.XInput": "4.2.0",
           "Vlc.DotNet.Forms": "3.1.0",
           "VideoLAN.LibVLC.Windows": "3.0.20",
