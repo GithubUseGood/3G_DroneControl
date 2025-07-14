@@ -72,6 +72,10 @@
               "target": "Package",
               "version": "[2025.0.0, )"
             },
+            "SharpDX": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "SharpDX.XInput": {
               "target": "Package",
               "version": "[4.2.0, )"
