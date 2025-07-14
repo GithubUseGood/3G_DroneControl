@@ -14,6 +14,7 @@ namespace UDPtest
     using System.Device.I2c;
     using System.Threading;
     using ZOHD_airplane_software;
+    using System.Diagnostics;
 
     /// <summary>
     /// Control servo motors using PCA9685
@@ -47,6 +48,7 @@ namespace UDPtest
             catch (Exception ex)
             {
                 Console.WriteLine($"Error connecting to PCA9685: {ex.Message}");
+                ResetI2CBus();
                 return null; // Return null if connection fails
             }
         }
@@ -71,13 +73,31 @@ namespace UDPtest
                 var Instructions = UnpackMessageTools.UnpackMessages(message);
                 foreach (var instruction in Instructions) 
                 {
-                    Console.WriteLine($"adress {instruction.adress} angle {instruction.angle}");
+               
                     SetServoAngle(pca, instruction.adress, instruction.angle);
                 }
             }
             finally
             {
                 semaphore.Release();
+            }
+        }
+
+        public static void ResetI2CBus()
+        {
+            try
+            {
+                var unload = Process.Start("sudo", "modprobe -r i2c-dev");
+                unload.WaitForExit();
+
+                var load = Process.Start("sudo", "modprobe i2c-dev");
+                load.WaitForExit();
+
+                Console.WriteLine("I2C bus reset successfully.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Failed to reset I2C bus: {ex.Message}");
             }
         }
 

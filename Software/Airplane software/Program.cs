@@ -31,6 +31,7 @@ namespace ZOHD_airplane_software
             TailscaleEndPoint = await UDP_Communication.CaptureIpFromMessage(_client);
             TailScaleIP = TailscaleEndPoint.Address;
             ServoControllerPca = Controls.ConnectServoController();
+            if (ServoControllerPca == null) { ServoControllerPca = Controls.ConnectServoController(); } // retry once
             Console.WriteLine("HOST:" + TailScaleIP.ToString() + " PORTS: VID: " + PortVID);
             OutputStatus.Start();
             StartUDPcomms();

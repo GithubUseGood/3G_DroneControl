@@ -82,17 +82,16 @@ namespace Ground_base_software
             UDP_Communication.TailScale.Up();
 
             
-          //  using (var connecting = new Form2()) // temp form to tell user its connecting
-          //  {
-            //    connecting.Show();
-            //    connecting.Refresh();
-
+            using (var connecting = new Form2()) // temp form to tell user its connecting
+            {
+                connecting.Show();
+               connecting.Refresh();
                 SSHclient = UDP_Communication.SSHOpenConnection();
-                UDP_Communication.StartScriptOnUAV(SSHclient);
+                UDP_Communication.OpenSSHWindow(SSHclient);
 
 
-          //      connecting.Close();
-          //  }
+                connecting.Close();
+            }
             
 
 

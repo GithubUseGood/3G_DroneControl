@@ -198,25 +198,32 @@ namespace ZOHD_airplane_software
         }
 
 
-        public static void StartScriptOnUAV(SshClient client) 
+        public static void OpenSSHWindow(SshClient client)
         {
             try
             {
-                client.Connect();
-            }
+                string ip = client.ConnectionInfo.Host;
+                string username = client.ConnectionInfo.Username;
 
-            catch (Exception e)
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "cmd.exe",
+                    Arguments = $"/k ssh {username}@{ip} -t \"cd ~/TESTcode && ./ZOHD\"",
+                    UseShellExecute = true,
+                    CreateNoWindow = false,
+                    WindowStyle = ProcessWindowStyle.Normal,
+                };
+
+                Process.Start(psi);
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show($"Failed to connect to UAV. Exceotion {e.Message} either quit, or start the script manually via SSH");
+                MessageBox.Show($"Failed to start CMD with SSH: {ex.Message}");
             }
-
-
-            using (var cmd = client.CreateCommand("nohup ./TESTcode/ZOHD > zohd.out 2>&1 &"))
-            {
-                cmd.Execute();
-            }
-            client.Disconnect();
         }
+
+
+
 
         private static string GetIPofUAV()
         {
